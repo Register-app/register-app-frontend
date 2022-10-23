@@ -1,6 +1,6 @@
 /* trzeba dac classname do danego elementu wtedy mozna tutaj dac css */
 footer{
-    padding:50px 0;
+    padding:15px 0;
     color:#f0f9ff;
     background-color:#282d32;
   }
@@ -10,11 +10,11 @@ footer{
     font-size:14px;
   }
   
-  .footer-dark ul {
+ h4 {
     padding:0;
     list-style:none;
     line-height:1.6;
-    font-size:12px;
+    font-size:8px;
     margin-bottom:0;
   }
   
@@ -52,23 +52,8 @@ footer{
     }
   }
   
-  .footer-dark .item.social > a {
-    font-size:20px;
-    width:36px;
-    height:36px;
-    line-height:36px;
-    display:inline-block;
-    text-align:center;
-    border-radius:50%;
-    box-shadow:0 0 0 1px rgba(255,255,255,0.4);
-    margin:0 8px;
-    color:#fff;
-    opacity:0.75;
-  }
-  
-  .footer-dark .item.social > a:hover {
-    opacity:0.9;
-  }
+
+
   
   .footer-dark .copyright {
     text-align:center;
@@ -77,3 +62,23 @@ footer{
     font-size:13px;
     margin-bottom:0;
   }
+
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+
+  footer {
+    min-height: 15px; 
+  }
+
+

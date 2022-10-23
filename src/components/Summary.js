@@ -7,7 +7,7 @@ import ButtonRow from "./ButtonRow";
 
 function Summary() {
   return (
-    <Container className="justify-content-md-center">
+    <Container className="justify-content-md-center min-vh-100">
       <ButtonRow/>
       <Row className="text-center">
       {/* Ten div to jest odstep od gornej belki */}
