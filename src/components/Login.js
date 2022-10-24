@@ -6,6 +6,7 @@ function Login() {
     return(
       
       <Container className="justify-content-md-center min-vh-100">
+        <div class="mt-5 col-md-12">
       <Row>
         <center>
         <Col className="col-md-4">
@@ -26,6 +27,7 @@ function Login() {
       </Col>
       </center>
     </Row>
+    </div>
       </Container>
 );
 }
