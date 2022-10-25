@@ -14,24 +14,25 @@ function Register() {
   //const navigate = useNavigate();
   //const [signupUser, { isLoading, error }] = useSignupUserMutation();
 
-  async function handleSignup(e, data) {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    console.log(data);
     //navigate("/");
     try {
-      const response = await axios.post(
-        REGISTER_URL,
-        JSON.stringify({ name, second_name: secondName, email, password }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
+      const response = await axios.post(REGISTER_URL, {
+        name,
+        second_name: secondName,
+        email,
+        password,
+      });
       console.log(response.data);
     } catch (error) {
-      console.log(error);
+      if (!error?.response) {
+        console.log("Nie wiem ok");
+      } else {
+        console.log(error.response?.status);
+      }
     }
-  }
+  };
 
   return (
     <Container>
