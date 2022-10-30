@@ -3,6 +3,7 @@ import Summary from "./components/Summary"
 import Footer from "./components/Footer";
 import Login from "./components/Login";
 import PlanZajec from "./components/PlanZajec";
+import Frekwencja from "./components/Frekwencja";
 import { Component } from "react";
 import {Row, Col} from 'react-bootstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,7 +15,8 @@ class App extends Component {
       name: "React",
       showHideSummary: true,
       showHideLogin: false,
-      showHidePlanZajec: false
+      showHidePlanZajec: false,
+      showHideFrekwencja: false
     };
     this.hideComponent = this.hideComponent.bind(this);
   }
@@ -22,23 +24,34 @@ class App extends Component {
   hideComponent(name) {
     console.log(name);
     switch (name) {
-      case "showHideSummary":
-        this.setState({ showHideSummary: !this.state.showHideSummary });
-        break;
+      // case "showHideSummary":
+      //   this.setState({ showHideSummary: !this.state.showHideSummary });
+      //   break;
       case "showHideLogin":
+        this.setState({ showHideSummary: !this.state.showHideSummary });
+        this.setState({ showHideFrekwencja: false });
+        this.setState({ showHidePlanZajec: false });
         this.setState({ showHideLogin: !this.state.showHideLogin });
         break;
       case "showHidePlanZajec":
-        this.setState({ showHideSummary: !this.state.showHideSummary });
-        this.setState({ showHidePlanZajec: !this.state.showHidePlanZajec });
+        this.setState({ showHideSummary: false });
+        this.setState({ showHideFrekwencja: false });
+        this.setState({ showHidePlanZajec: true });
+        this.setState({ showHideLogin: false });
+        break;
+      case "showHideFrekwencja":
+        this.setState({ showHideSummary: false });
+        this.setState({ showHidePlanZajec: false });
+        this.setState({ showHideLogin: false });
+        this.setState({ showHideFrekwencja: true });
         break;
       default:
-        
+        this.setState({ showHideSummary: true });
     }
   }
 
   render() {
-    const { showHideSummary, showHideLogin, showHidePlanZajec } = this.state;
+    const { showHideSummary, showHideLogin, showHidePlanZajec, showHideFrekwencja } = this.state;
     return (
       <div class="row gy-4"> 
         <Header/>
@@ -49,7 +62,7 @@ class App extends Component {
           <Col><button type="button" onClick={() => this.hideComponent("showHideLogin")}  class="btn btn-danger">Oceny</button></Col>
           <Col><button type="button" onClick={() => this.hideComponent("showHidePlanZajec")} class="btn btn-success">Terminarz</button></Col>
           <Col><button type="button" onClick={() => this.hideComponent("showHidePlanZajec")} class="btn btn-warning">Wiadomości</button></Col>
-          <Col><button type="button" onClick={() => this.hideComponent("showHidePlanZajec")} class="btn btn-info">Frekwencja</button></Col>
+          <Col><button type="button" onClick={() => this.hideComponent("showHideFrekwencja")} class="btn btn-info">Frekwencja</button></Col>
           </div>
         </Row>
         <Row>
@@ -57,6 +70,7 @@ class App extends Component {
           {showHideSummary && <Summary />}
           {showHideLogin && <Login />}
           {showHidePlanZajec && <PlanZajec />}
+          {showHideFrekwencja && <Frekwencja />}
           </div>
           </Row>
         <Footer/>

@@ -14,7 +14,7 @@ function Header() {
   <header>
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
             <img alt="E-Dziennik" src={logo} width="200" height="70" className="d-inline-block align-top"/>{' '}{/* Tekst obok loga */}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
