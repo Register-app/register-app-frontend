@@ -2,7 +2,7 @@ import {useState} from 'react';
 import "./style/custom.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Container, Row, Col } from 'react-bootstrap';
-// import ButtonRow from "./ButtonRow";
+
 
 
 function Terminarz() {
