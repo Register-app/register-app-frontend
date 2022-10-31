@@ -5,7 +5,6 @@ import Login from "./Login";
 
 function Logout() {
     return(
-      
       <Container className="justify-content-md-center min-vh-100">
         <div class="mt-5 col-md-12">
       <Row>

@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import "./style/custom.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Container, Row, Col, Table } from 'react-bootstrap';
+import {Container, Row, Table } from 'react-bootstrap';
 
 
 

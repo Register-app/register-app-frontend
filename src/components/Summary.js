@@ -1,14 +1,13 @@
 import "./style/custom.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Container, Row, Col } from 'react-bootstrap';
-// import ButtonRow from "./ButtonRow";
+
 
 
 
 function Summary() {
   return (
     <Container className="justify-content-md-center min-vh-100">
-      {/* <ButtonRow/> */}
       <Row className="text-center">
       {/* Ten div to jest odstep od gornej belki */}
         <div class="row gy-4"> 
