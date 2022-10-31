@@ -40,6 +40,7 @@ class App extends Component {
         this.setState({ showHideLogin: true });
         this.setState({ showHideTerminarz: false });
         this.setState({ showHideOceny: false });
+        this.setState({ showHideWiadomosci: false });
         break;
       case "showHidePlanZajec":
         this.setState({ showHideSummary: false });
@@ -48,6 +49,7 @@ class App extends Component {
         this.setState({ showHideLogin: false });
         this.setState({ showHideTerminarz: false });
         this.setState({ showHideOceny: false });
+        this.setState({ showHideWiadomosci: false });
         break;
       case "showHideFrekwencja":
         this.setState({ showHideSummary: false });
@@ -56,6 +58,7 @@ class App extends Component {
         this.setState({ showHideFrekwencja: true });
         this.setState({ showHideTerminarz: false });
         this.setState({ showHideOceny: false });
+        this.setState({ showHideWiadomosci: false });
         break;
       case "showHideWiadomosci":
         this.setState({ showHideSummary: false });
