@@ -1,11 +1,7 @@
 import "./style/custom.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "../logo.PNG";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Button from 'react-bootstrap/Button';
+import {Container,Button,Nav,Navbar,NavDropdown } from 'react-bootstrap';
 
 const handleClick = (e) => {
   e.preventDefault();
@@ -18,7 +14,7 @@ function Header() {
   <header>
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
             <img alt="E-Dziennik" src={logo} width="200" height="70" className="d-inline-block align-top"/>{' '}{/* Tekst obok loga */}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -33,11 +29,11 @@ function Header() {
             <Nav.Link>
               {/* To sie przyda gdy bedzie user zalogowany */}
               <NavDropdown title="Witaj, imie i nazwisko" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.1">Nowa wiadomość</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 Another action
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Ustawienia</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
               <Button onClick={handleClick}>Wyloguj</Button>
