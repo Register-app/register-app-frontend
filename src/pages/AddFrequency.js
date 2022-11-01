@@ -6,6 +6,8 @@ import ValueSelect from "components/ValueSelect";
 import "./style/Frequency.css";
 
 const AddFrequency = () => {
+
+  //Przykladowe dane
   const options = [
     { value: "default", text: "Klasa domyślna" },
     { value: "sem1", text: "Semestr 1" },

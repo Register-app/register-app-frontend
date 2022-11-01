@@ -14,6 +14,7 @@ import Messages from "pages/Messages";
 import Grades from "pages/Grades";
 import Timetable from "pages/Timetable";
 import Logout from "components/Logout";
+import AddGrade from "pages/AddGrade";
 
 const App = () => {
   return (
@@ -24,7 +25,7 @@ const App = () => {
         <Route path="/" element={<Summary />} />
         <Route path="/login" element={<Login />} />
         <Route path="/lesson-plan" element={<LessonPlan />} />
-        <Route path="/grades" element={<Grades />} />
+        <Route path="/grades" element={<AddGrade />} />
         <Route path="/timetable" element={<Timetable />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="/frequency" element={<AddFrequency />} />
