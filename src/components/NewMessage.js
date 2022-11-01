@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./style/custom.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Form } from "react-bootstrap";
+import ValueSelect from "./ValueSelect";
 
 const NewMessage = () => {
   const options = [
@@ -38,18 +39,7 @@ const NewMessage = () => {
             <Form.Label>
               <b>Odbiorca</b>{" "}
             </Form.Label>
-            <select
-              class="form-select form-select-xs mb-3"
-              aria-label=".form-select-lg example"
-              value={selected}
-              onChange={handleChange}
-            >
-              {options.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.text}
-                </option>
-              ))}
-            </select>
+            <ValueSelect options={options} value={selected} onChange={handleChange}/>
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Label>

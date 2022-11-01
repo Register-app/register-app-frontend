@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
+import ValueSelect from "components/ValueSelect";
 
 const Timetable = () => {
   const options = [
@@ -23,18 +24,7 @@ const Timetable = () => {
         <div class="row gy-3">
           <h3>Terminarz</h3>
           <br />
-          <select
-            class="form-select form-select-xs mb-3"
-            aria-label=".form-select-lg example"
-            value={selected}
-            onChange={handleChange}
-          >
-            {options.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.text}
-              </option>
-            ))}
-          </select>
+          <ValueSelect options={options} value={selected} onChange={handleChange}/>
           {/* {dniTygodnia} */}
           <Col>
             <h4>Poniedziałek</h4>

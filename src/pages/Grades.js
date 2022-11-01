@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Table } from "react-bootstrap";
+import ValueSelect from "components/ValueSelect";
 
 const Grades = () => {
   const options = [
@@ -26,18 +27,7 @@ const Grades = () => {
         </div>
       </Row>
       <div>
-        <select
-          class="form-select form-select-xs mb-3"
-          aria-label=".form-select-lg example"
-          value={selected}
-          onChange={handleChange}
-        >
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.text}
-            </option>
-          ))}
-        </select>
+        <ValueSelect options={options} value={selected} onChange={handleChange}/>
       </div>
       <Row>
         <Table striped bordered hover responsive="sm">
