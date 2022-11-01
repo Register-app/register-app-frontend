@@ -1,28 +1,41 @@
-import "./style/custom.css";
+import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Row, Col} from 'react-bootstrap';
+import "./style/custom.css";
 
-
-const handleClick = (e) => {
-  e.preventDefault();
-  const element = e.target;
-  alert("Nacisnales: "+element.id);
-}
-
-
-function ButtonRow() {
+const ButtonRow = () => {
   return (
-      <Row>
-        <div id='przyciski' class="row gy-4"> 
-          <Col><button type="button" onClick={handleClick} id='planButton' class="btn btn-primary">Plan zajęć</button></Col>
-          <Col><button type="button" onClick={handleClick} id='ocenyButton' class="btn btn-danger">Oceny</button></Col>
-          <Col><button type="button" onClick={handleClick} id='terminarzButton' class="btn btn-success">Terminarz</button></Col>
-          <Col><button type="button" onClick={handleClick} id='wiadomosciButton' class="btn btn-warning">Wiadomości</button></Col>
-          <Col><button type="button" onClick={handleClick} id='frekwencjaButton' class="btn btn-info">Frekwencja</button></Col>
-        </div>
+    <Container>
+      <Row className="text-center mt-3">
+        <Col>
+          <Link to="/lesson-plan" class="btn btn-primary">
+            Plan zajęć
+          </Link>
+        </Col>
+        <Col>
+          <Link to="/grades" class="btn btn-danger">
+            Oceny
+          </Link>
+        </Col>
+        <Col>
+          <Link to="/timetable" class="btn btn-success">
+            Terminarz
+          </Link>
+        </Col>
+        <Col>
+          <Link to="/messages" class="btn btn-warning">
+            Wiadomości
+          </Link>
+        </Col>
+        <Col>
+          <Link to="/frequency" class="btn btn-info">
+            Frekwencja
+          </Link>
+        </Col>
       </Row>
-     
+    </Container>
   );
-}
+};
 
 export default ButtonRow;
