@@ -17,6 +17,8 @@ const Logout = () => {
           <Login />
         </Row>
       </div>
+      {/* pusty div do zwiekszenia odstepu od footera */}
+      <div class="mt-5 col-md-12"></div> 
     </Container>
   );
 };
