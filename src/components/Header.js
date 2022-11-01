@@ -1,17 +1,21 @@
 import { Container, Button, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import logo from "assets/logo.PNG";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style/custom.css";
 
-const handleClick = (e) => {
-  e.preventDefault();
-  // console.log('The link was clicked.');
-  alert("Zaloguj sie");
-};
+
 
 const Header = () => {
+
+  const navigate = useNavigate();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    navigate("/logout");
+  };
+
   return (
     <header>
       <Navbar bg="light" expand="lg">
@@ -50,7 +54,7 @@ const Header = () => {
                     Ustawienia
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4">
+                  <NavDropdown.Item href="/logout">
                     <Button onClick={handleClick}>Wyloguj</Button>
                   </NavDropdown.Item>
                 </NavDropdown>

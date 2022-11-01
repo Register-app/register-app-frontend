@@ -12,6 +12,7 @@ import Frequency from "pages/Frequency";
 import Messages from "pages/Messages";
 import Grades from "pages/Grades";
 import Timetable from "pages/Timetable";
+import Logout from "components/Logout";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/timetable" element={<Timetable />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="/frequency" element={<Frequency />} />
+        <Route path="/logout" element={<Logout />} />
       </Routes>
       <Footer />
     </div>
