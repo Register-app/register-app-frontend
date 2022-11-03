@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import axios from "/api/axios";
+import axios from "lib/axios";
 
 const PWD_REGEX = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
 const REGISTER_URL = "/registration";

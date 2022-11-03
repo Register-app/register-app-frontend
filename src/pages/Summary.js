@@ -1,30 +1,29 @@
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style/Summary.css";
+import Users from "components/Users";
 
 const Summary = () => {
   return (
     <Container className="Summary justify-content-md-center">
-      <Row className="text-center">
+      <Row className="text-center mt-4 mb-2">
         {/* Ten div to jest odstep od gornej belki */}
-        <div class="row gy-3">
-          {/* Konfiguracja dla rodzica/ucznia
+        {/* Konfiguracja dla rodzica/ucznia
           <Col><h4>Plan lekcji</h4></Col>
           <Col><h4>Ostatnie oceny</h4></Col>
           <Col><h4>Terminarz</h4></Col>
           <Col><h4>Ostatnie wiadomości</h4></Col> */}
 
-          {/* Konfiguracja dla nauczyciela */}
-          <Col>
-            <h4>Dzisiejszy plan</h4>
-          </Col>
-          <Col>
-            <h4>Terminarz</h4>
-          </Col>
-          <Col>
-            <h4>Ostatnie wiadomości</h4>
-          </Col>
-        </div>
+        {/* Konfiguracja dla nauczyciela */}
+        <Col>
+          <h4>Dzisiejszy plan</h4>
+        </Col>
+        <Col>
+          <h4>Terminarz</h4>
+        </Col>
+        <Col>
+          <h4>Ostatnie wiadomości</h4>
+        </Col>
       </Row>
       {/* Widok ucznia/rodzica(4 kolumny)
         <Row>
@@ -56,6 +55,11 @@ const Summary = () => {
             <br />
             blablasadfasdfasdfasdfasdf
           </div>
+        </Col>
+      </Row>
+      <Row className="text-center">
+        <Col>
+          <Users />
         </Col>
       </Row>
     </Container>
