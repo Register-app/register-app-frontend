@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Table, Button } from "react-bootstrap";
 import DatePicker from "components/DatePicker";
 import ValueSelect from "components/ValueSelect";
-import "./style/Frequency.css";
+import GradeValue from "components/GradeValue";
 
 const AddGrade = () => {
 
@@ -107,68 +107,55 @@ const AddGrade = () => {
               <td>1</td>
               <td>Jan Kowal</td>
               <td>
-                <div class="row px-2">
-                  <div class="col-2 sprawdzian">5</div>
-                  <div class="col-2 aktywnosc">5</div>
-                  <div class="col-2 kartkowka">3+</div>
-                  <div class="col-2 aktywnosc">5</div>
-                </div>
+                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='sprawdzian'/>
+                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='kartkowka'/>
+                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='kartkowka'/>
+                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='aktywnosc'/>
               </td>
               <td>
-                <div class="row px-2">
-                  <div class="col-2 propozycja">3-</div>
-                </div>
+                  {/* <div class="col-2 propozycja">3-</div> */}
+                  <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='propozycja'/>
               </td>
               <td>
-                <div class="row px-2">
-                  <div class="col-2 koncowa">3</div>
-                </div>
+                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='koncowa'/>
               </td>
-              <td><ValueSelect id='1' options={ocenyOptions} value={selected} onChange={handleChangeOcena}/></td>
+              <td>
+                <ValueSelect id='1' options={ocenyOptions} value={selected} onChange={handleChangeOcena}/>
+              </td>
             </tr>
             <tr>
               <td>2</td>
               <td>Pawel Przybysz</td>
               <td>
-                <div class="row px-2">
-                  <div class="col-2 sprawdzian">3</div>
-                  <div class="col-2 aktywnosc">2</div>
-                  <div class="col-2 kartkowka">3+</div>
-                  <div class="col-2 aktywnosc">5</div>
-                </div>
+                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='sprawdzian'/>
+                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='kartkowka'/>
+                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='kartkowka'/>
+                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='aktywnosc'/>
               </td>
               <td>
-                <div class="row px-2">
-                  <div class="col-2 propozycja">4+</div>
-                </div>
+               <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='propozycja'/>
+                </td>
+              <td>
+                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='koncowa'/>
               </td>
               <td>
-                <div class="row px-2">
-                  <div class="col-2 koncowa">4</div>
-                </div>
+                <ValueSelect id='2' options={ocenyOptions} value={selected} onChange={handleChangeOcena}/>
               </td>
-              <td><ValueSelect id='2' options={ocenyOptions} value={selected} onChange={handleChangeOcena}/></td>
             </tr>
             <tr>
               <td>3</td>
               <td>Anna Bareja</td>
               <td>
-                <div class="row px-2">
-                  <div class="col-2 sprawdzian">4+</div>
-                  <div class="col-2 aktywnosc">3=</div>
-                  <div class="col-2 kartkowka">3+</div>
-                  <div class="col-2 aktywnosc">5</div>
-                </div>
+                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='sprawdzian'/>
+                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='kartkowka'/>
+                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='kartkowka'/>
+                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='aktywnosc'/>
               </td>
               <td>
-                <div class="row px-2">
-                  <div class="col-2 propozycja">2</div>
-                </div>
+                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='propozycja'/>
               </td>
               <td>
-                <div class="row px-2">
-                  <div class="col-2 koncowa">2</div>
-                </div>
+                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='koncowa'/>
               </td>
               <td><ValueSelect id='3' options={ocenyOptions} value={selected} onChange={handleChangeOcena}/></td>
             </tr>
