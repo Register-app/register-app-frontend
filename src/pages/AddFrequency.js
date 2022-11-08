@@ -3,23 +3,26 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col, Table, Button } from "react-bootstrap";
 import DatePicker from "components/DatePicker";
 import ValueSelect from "components/ValueSelect";
+import ClassSelect from "components/ClassSelect";
 import "./style/Frequency.css";
 
 const AddFrequency = () => {
 
   //Przykladowe dane
-  const options = [
-    { value: "default", text: "Klasa domyślna" },
-    { value: "sem1", text: "Semestr 1" },
-    { value: "sem2", text: "Semestr 2" },
+  var classes = [
+    { "klasa_id": "1", "klasa": "VII A" },
+    { "klasa_id": "2", "klasa": "VI B" },
   ];
+
   const frekwencjaOptions = [
     { value: "brak", text: "brak" },
     { value: "obecny", text: "obecny" },
     { value: "nieobecny", text: "nieobecny" },
+    { value: "spoznienie", text: "spoznienie" },
+    { value: "zwolnienie", text: "zwolnienie" },
   ];
 
-  const [selected, setSelected] = useState(options[0].value);
+  const [selected, setSelected] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date().toLocaleDateString('en-CA'));
   // console.log("Data: "+ new Date().toLocaleDateString('en-CA'));
 
@@ -31,12 +34,23 @@ const AddFrequency = () => {
 
   const handleChangeFrequency = (event) => {
     console.log(event.target.value);
-    if(event.target.value==='obecny'){
-      document.getElementById(event.target.id).style.backgroundColor = "blue";
+    switch(event.target.value){
+      case 'obecny':
+        document.getElementById(event.target.id).style.backgroundColor = "green";
+        break;
+      case 'nieobecny':
+        document.getElementById(event.target.id).style.backgroundColor = "red";
+        break;
+      case 'spoznienie':
+        document.getElementById(event.target.id).style.backgroundColor = "orange";
+        break;
+      case 'zwolnienie':
+        document.getElementById(event.target.id).style.backgroundColor = "rgb(131, 177, 236)";
+        break;
+      default:
+        document.getElementById(event.target.id).style.backgroundColor = "white";
     }
-    if(event.target.value==='nieobecny'){
-      document.getElementById(event.target.id).style.backgroundColor = "red";
-    }
+
     alert(event.target.value);
     setSelected(event.target.value);
   };
@@ -58,7 +72,7 @@ const AddFrequency = () => {
             <Row>
               <Col>
               Wybierz klasę:
-              <ValueSelect options={options} value={selected} onChange={handleChange}/>
+              <ClassSelect id="klasa" options={classes} value={selected} onChange={handleChange}/>
                   </Col>
               <Col>
               Wybierz datę:
@@ -106,7 +120,7 @@ const AddFrequency = () => {
                     <tr>
                       <td>6</td>
                       <td>Larry the Bird</td>
-                      <td><ValueSelect id='test' options={frekwencjaOptions} value={selected} onChange={handleChange}/></td>
+                      <td><ValueSelect id='6' options={frekwencjaOptions} value={selected} onChange={handleChangeFrequency}/></td>
                     </tr>
                   </tbody>
                 </Table>

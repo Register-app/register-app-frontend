@@ -4,30 +4,77 @@ import { Container, Row, Col, Table, Button } from "react-bootstrap";
 import DatePicker from "components/DatePicker";
 import ValueSelect from "components/ValueSelect";
 import GradeValue from "components/GradeValue";
+import ClassSelect from "components/ClassSelect";
 
 const AddGrade = () => {
 
   //Przykladowe dane
-  const options = [
-    { value: "default", text: "Klasa domyślna" },
-    { value: "sem1", text: "Semestr 1" },
-    { value: "sem2", text: "Semestr 2" },
+
+  var grades = [
+                {
+                  "student_id":"1",
+                  "grade_id":"2",
+                  "subject":"Przyroda",
+                  "category":"kartkowka",
+                  "grade":"5"
+              },
+              {
+                "student_id":"2",
+                "grade_id":"3",
+                "subject":"Przyroda",
+                "category":"kartkowka",
+                "grade":"2"
+            }
+              ];
+
+  var classes = [
+    { "klasa_id": "1", "klasa": "VII A" },
+    { "klasa_id": "2", "klasa": "VI B" },
+    { "klasa_id": "3", "klasa": "IV C" },
   ];
+
+
+// console.log(grades.length);
+
+// classes.classes.forEach(obj => {
+//     console.log(obj);
+//     // klasa.set(obj.klasa_id,obj.klasa)
+//     // klasa.push(obj.klasa);
+//   });
+
+  // klasa.forEach((values,keys)=>{
+  //   console.log(values)
+  // })
+  
+
+
   const ocenyOptions = [
-    { value: "0", text: "0" },
     { value: "1", text: "1" },
+    { value: "2-", text: "2-" },
     { value: "2", text: "2" },
+    { value: "2+", text: "2+" },
+    { value: "3-", text: "3-" },
     { value: "3", text: "3" },
+    { value: "3+", text: "3+" },
+    { value: "4-", text: "4-" },
     { value: "4", text: "4" },
+    { value: "4+", text: "4+" },
+    { value: "5-", text: "5-" },
+    { value: "5", text: "5" },
+    { value: "5+", text: "5+" },
+    { value: "6-", text: "6-" },
+    { value: "6", text: "6" },
   ];
 
   const kategoriaOptions = [
     { value: "wybierz", text: "wybierz" },
     { value: "sprawdzian", text: "Sprawdzian" },
     { value: "kartkowka", text: "Kartkówka" },
+    { value: "aktywnosc", text: "Aktywność" },
+    { value: "inne", text: "Inne" },
   ];
 
-  const [selected, setSelected] = useState(options[0].value);
+  const [selected, setSelected] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date().toLocaleDateString('en-CA'));
   // console.log("Data: "+ new Date().toLocaleDateString('en-CA'));
 
@@ -78,7 +125,7 @@ const AddGrade = () => {
             <Row>
               <Col>
               Wybierz klasę:
-              <ValueSelect options={options} value={selected} onChange={handleChange}/>
+              <ClassSelect id="klasa" options={classes} value={selected} onChange={handleChange}/>
               </Col>
               <Col>
               Wybierz datę:

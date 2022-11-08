@@ -26,10 +26,11 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/lesson-plan" element={<LessonPlan />} />
         <Route path="/grades" element={<AddGrade />} />
+        <Route path="/grades2" element={<Grades />} />
         <Route path="/timetable" element={<Timetable />} />
         <Route path="/messages" element={<Messages />} />
+        <Route path="/frequency2" element={<Frequency />} />
         <Route path="/frequency" element={<AddFrequency />} />
-        <Route path="/addfrequency" element={<AddFrequency />} />
         <Route path="/logout" element={<Logout />} />
       </Routes>
       <Footer />
