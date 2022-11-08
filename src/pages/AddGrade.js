@@ -86,11 +86,21 @@ const AddGrade = () => {
 
   const handleChangeKategoria = (event) => {
     console.log(event.target.value);
-    if(event.target.value==='sprawdzian'){
-      document.getElementById(event.target.id).style.backgroundColor = "red";
-    }
-    if(event.target.value==='kartkowka'){
-      document.getElementById(event.target.id).style.backgroundColor = "green";
+    switch(event.target.value){
+      case 'kartkowka':
+        document.getElementById(event.target.id).style.backgroundColor = "green";
+        break;
+      case 'aktywnosc':
+        document.getElementById(event.target.id).style.backgroundColor = "orange";
+        break;
+      case 'sprawdzian':
+        document.getElementById(event.target.id).style.backgroundColor = "red";
+        break;
+      case 'inne':
+        document.getElementById(event.target.id).style.backgroundColor = "rgb(131, 177, 236)";
+        break;
+      default:
+        document.getElementById(event.target.id).style.backgroundColor = "white";
     }
     //alert(event.target.value);
     setSelected(event.target.value);
@@ -98,11 +108,21 @@ const AddGrade = () => {
 
   const handleChangeOcena = (event) => {
     console.log(event.target.value);
-    if(document.getElementById('kategoria').value==='sprawdzian'){
-      document.getElementById(event.target.id).style.backgroundColor = "red";
-    }
-    if(document.getElementById('kategoria').value==='kartkowka'){
-      document.getElementById(event.target.id).style.backgroundColor = "green";
+    switch(document.getElementById('kategoria').value){
+      case 'kartkowka':
+        document.getElementById(event.target.id).style.backgroundColor = "green";
+        break;
+      case 'aktywnosc':
+        document.getElementById(event.target.id).style.backgroundColor = "orange";
+        break;
+      case 'sprawdzian':
+        document.getElementById(event.target.id).style.backgroundColor = "red";
+        break;
+      case 'inne':
+        document.getElementById(event.target.id).style.backgroundColor = "rgb(131, 177, 236)";
+        break;
+      default:
+        document.getElementById(event.target.id).style.backgroundColor = "white";
     }
     //alert(event.target.value);
     setSelected(event.target.value);
