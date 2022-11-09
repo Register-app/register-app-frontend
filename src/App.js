@@ -17,14 +17,15 @@ import Unauthorized from "components/Unauthorized";
 import Layout from "components/Layout";
 import RequireAuth from "components/RequireAuth";
 import useAuth from "./hooks/useAuth";
+import { MessagesProvider } from "context/MessagesProvider";
 
 const App = () => {
-  const { auth } = useAuth();
+  const { user } = useAuth();
 
   return (
     <div className="App">
       <Header />
-      {auth && <ButtonRow />}
+      {user && <ButtonRow />}
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="login" element={<Login />} />
@@ -34,7 +35,14 @@ const App = () => {
             <Route path="lesson-plan" element={<LessonPlan />} />
             <Route path="grades" element={<Grades />} />
             <Route path="timetable" element={<Timetable />} />
-            <Route path="messages" element={<Messages />} />
+            <Route
+              path="messages"
+              element={
+                <MessagesProvider>
+                  <Messages />
+                </MessagesProvider>
+              }
+            />
             <Route path="frequency" element={<Frequency />} />
             <Route path="*" element={<NotFound />} />
           </Route>

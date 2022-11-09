@@ -9,7 +9,7 @@ import "./style/custom.css";
 const LOGIN_URL = "/auth/login";
 
 const Login = () => {
-  const { setAuth } = useAuth();
+  const { setUser } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,14 +24,14 @@ const Login = () => {
     try {
       const response = await myAxios.post(LOGIN_URL, { email, password });
       console.log(response?.data);
-      setAuth(response?.data);
+      setUser(response?.data);
       localStorage.setItem("user", JSON.stringify(response?.data));
       setEmail("");
       setPassword("");
       navigate(from, { replace: true });
     } catch (error) {
       if (!error?.response) {
-        console.error("Brak odpowiedzi ze strony serwera");
+        console.error("Brak odpowiedzi ze strony serwera", error);
       } else if (error.response?.status === 400) {
         console.error("Niepodany email lub hasło");
       } else if (error.response?.status === 401) {

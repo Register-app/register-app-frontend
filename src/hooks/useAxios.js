@@ -3,13 +3,13 @@ import useAuth from "./useAuth";
 import axios from "lib/axios";
 
 const useAxios = () => {
-  const { auth } = useAuth();
+  const { user } = useAuth();
 
   useEffect(() => {
     const requestIntercept = axios.interceptors.request.use(
       (config) => {
         if (!config.headers["Authorization"]) {
-          config.headers["Authorization"] = `Bearer ${auth?.jwtToken}`;
+          config.headers["Authorization"] = `Bearer ${user?.jwtToken}`;
         }
         return config;
       },
@@ -19,7 +19,7 @@ const useAxios = () => {
     return () => {
       axios.interceptors.request.eject(requestIntercept);
     };
-  }, [auth]);
+  }, [user]);
 
   return axios;
 };
