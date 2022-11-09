@@ -19,12 +19,36 @@ const AddGrade = () => {
                   "grade":"5"
               },
               {
-                "student_id":"2",
+                "student_id":"1",
+                "grade_id":"5",
+                "subject":"Przyroda",
+                "category":"sprawdzian",
+                "grade":"2"
+            },
+              {
+                "student_id":"64",
                 "grade_id":"3",
                 "subject":"Przyroda",
-                "category":"kartkowka",
+                "category":"aktywnosc",
                 "grade":"2"
             }
+              ];
+  var students = [
+                {
+                  "student_id":"1",
+                  "name":"Jan",
+                  "second_name":"Kowal",
+              },
+              {
+                "student_id":"53",
+                "name":"Janina",
+                "second_name":"Bareja",
+            },
+            {
+              "student_id":"64",
+              "name":"Karolina",
+              "second_name":"Turban",
+          }
               ];
 
   var classes = [
@@ -46,6 +70,12 @@ const AddGrade = () => {
   //   console.log(values)
   // })
   
+console.log(students);
+
+students.forEach(obj =>{
+  console.log(obj.second_name)
+})
+
 
 
   const ocenyOptions = [
@@ -134,6 +164,63 @@ const AddGrade = () => {
     setSelectedDate(event.target.value);
   };
 
+
+  function studentsGrades(students, grades){
+    
+    return(
+      <>
+          <>
+          {grades.map(grade=>{
+            if(students.student_id===grade.student_id){
+              return(
+                <GradeValue id={grade.grade_id} options={ocenyOptions} value={grade.grade} selected={grade.grade} onChange={handleChangeOcena} type={grade.category}/>
+              )  
+            }
+    
+          })}
+      
+          </>
+  </>)
+  }
+
+  function studentsList(students){
+  var i=0;
+  return(
+    <>
+    {students.map(student =>{
+      i++;
+      return(
+        
+            <tr>
+              <td>{i}</td>
+              <td>{student.name+' '+student.second_name}</td>
+              <td>
+                {studentsGrades(student,grades)}
+              </td>
+              <td>
+                  <GradeValue id="ocenaPropozycja" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='propozycja'/>
+              </td>
+              <td>
+                <GradeValue id="ocenaKoncowa" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='koncowa'/>
+              </td>
+              <td>
+                <ValueSelect id={i} options={ocenyOptions} value={selected} onChange={handleChangeOcena}/>
+              </td>
+            </tr>
+           
+            )
+            
+        })
+  }
+  </>)
+
+  
+
+    
+  
+  
+}
+
   
   return (
     <Container className="Frequency justify-content-md-center">
@@ -142,6 +229,7 @@ const AddGrade = () => {
           <h3 id='test'>Dodaj ocenę</h3>
           
           <Container className="row gy-4 justify-content-md-center">
+          
             <Row>
               <Col>
               Wybierz klasę:
@@ -158,6 +246,7 @@ const AddGrade = () => {
             </Row>
             <Row>
               <Container className="row gy-2 justify-content-md-center">
+              
               <Table striped bordered hover responsive="sm">
           <thead>
             <tr>
@@ -170,62 +259,9 @@ const AddGrade = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Jan Kowal</td>
-              <td>
-                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='sprawdzian'/>
-                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='kartkowka'/>
-                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='kartkowka'/>
-                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='aktywnosc'/>
-              </td>
-              <td>
-                  {/* <div class="col-2 propozycja">3-</div> */}
-                  <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='propozycja'/>
-              </td>
-              <td>
-                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='koncowa'/>
-              </td>
-              <td>
-                <ValueSelect id='1' options={ocenyOptions} value={selected} onChange={handleChangeOcena}/>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Pawel Przybysz</td>
-              <td>
-                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='sprawdzian'/>
-                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='kartkowka'/>
-                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='kartkowka'/>
-                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='aktywnosc'/>
-              </td>
-              <td>
-               <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='propozycja'/>
-                </td>
-              <td>
-                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='koncowa'/>
-              </td>
-              <td>
-                <ValueSelect id='2' options={ocenyOptions} value={selected} onChange={handleChangeOcena}/>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Anna Bareja</td>
-              <td>
-                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='sprawdzian'/>
-                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='kartkowka'/>
-                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='kartkowka'/>
-                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='aktywnosc'/>
-              </td>
-              <td>
-                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='propozycja'/>
-              </td>
-              <td>
-                <GradeValue id="ocena" options={ocenyOptions} value={selected} onChange={handleChangeOcena} type='koncowa'/>
-              </td>
-              <td><ValueSelect id='3' options={ocenyOptions} value={selected} onChange={handleChangeOcena}/></td>
-            </tr>
+          {studentsList(students)}
+
+           
           </tbody>
         </Table>
                 <Row>
