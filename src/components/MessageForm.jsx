@@ -132,53 +132,18 @@ const MessageForm = () => {
   // }
   return (
     <>
-      {/* <div className="messages-output">
-        {user && !privateMemberMsg?._id && (
-          <div className="alert alert-info">{currentRoom}</div>
-        )}
-        {user && privateMemberMsg?._id && (
+      <div className="messages-output">
+        {user && <div className="alert alert-info"></div>}
+        {user && (
           <>
             <div className="alert alert-info conversation-info">
-              <div>Twoja rozmowa z {privateMemberMsg.name} </div>
+              <div>Twoja rozmowa z </div>
             </div>
           </>
         )}
         {!user && <div className="alert alert-danger">Zaloguj się!</div>}
-
-        {user &&
-          messages.map(({ _id: date, messagesByDate }, idx) => (
-            <div key={idx}>
-              <p className="alert alert-info text-center message-date-indicator">
-                {date}
-              </p>
-              {messagesByDate?.map(
-                ({ content, time, from: sender }, msgIdx) => (
-                  <div
-                    className={
-                      sender?.email === user?.email
-                        ? "message"
-                        : "incoming-message"
-                    }
-                    key={msgIdx}
-                  >
-                    <div className="message-inner">
-                      <div className="d-flex align-items-center mb-3">
-                        />
-                        <p className="message-sender">
-                          {sender._id === user?._id ? "Ty" : sender.name}
-                        </p>
-                      </div>
-                      <p className="message-content">{content}</p>
-                      <p className="message-timestamp-left">{time}</p>
-                    </div>
-                  </div>
-                )
-              )}
-            </div>
-          ))}
-        <div ref={messageEndRef} />
       </div>
-      <Form onSubmit={handleSubmit}>
+      <Form>
         <Row>
           <Col md={11}>
             <Form.Group>
@@ -186,8 +151,6 @@ const MessageForm = () => {
                 type="text"
                 placeholder="Twoja wiadomość"
                 disabled={!user}
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
               ></Form.Control>
             </Form.Group>
           </Col>
@@ -202,7 +165,7 @@ const MessageForm = () => {
             </Button>
           </Col>
         </Row>
-      </Form> */}
+      </Form>
     </>
   );
 };
