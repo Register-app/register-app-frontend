@@ -3,23 +3,25 @@ import { createContext, useState } from "react";
 const MessagesContext = createContext({});
 
 export const MessagesProvider = ({ children }) => {
-  const [privateChats, setPrivateChats] = useState(new Map());
-  const [tab, setTab] = useState("");
-  const [userData, setUserData] = useState({
-    username: "",
-    receivername: "",
-    message: "",
-  });
+  const [users, setUsers] = useState([]);
+  const [messages, setMessages] = useState([]);
+  const [userMsg, setUserMsg] = useState("");
+  const [message, setMessage] = useState("");
+  const [stompClient, setStompClient] = useState(null);
 
   return (
     <MessagesContext.Provider
       value={{
-        tab,
-        setTab,
-        userData,
-        setUserData,
-        privateChats,
-        setPrivateChats,
+        users,
+        setUsers,
+        userMsg,
+        setUserMsg,
+        messages,
+        setMessages,
+        message,
+        setMessage,
+        stompClient,
+        setStompClient,
       }}
     >
       {children}

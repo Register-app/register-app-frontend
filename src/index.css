@@ -38,3 +38,7 @@ code {
     flex-grow: 1;
     overflow-y: auto;
 }
+
+.Navigation {
+    margin-bottom: 15px;
+}

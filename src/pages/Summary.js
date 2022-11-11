@@ -6,7 +6,7 @@ import Users from "components/Users";
 const Summary = () => {
   return (
     <Container className="Summary justify-content-md-center">
-      <Row className="text-center mt-4 mb-2">
+      <Row className="text-center mb-2">
         {/* Ten div to jest odstep od gornej belki */}
         {/* Konfiguracja dla rodzica/ucznia
           <Col><h4>Plan lekcji</h4></Col>

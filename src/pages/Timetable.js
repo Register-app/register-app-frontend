@@ -18,40 +18,38 @@ const Timetable = () => {
   };
   return (
     <Container className="Timetable justify-content-md-center">
-      <Row className="text-center">
+      <Row className="text-center mb-2">
         {/* Ten div niżej to jest odstep od gornej belki */}
-        <div class="row gy-3">
-          <h3>Terminarz</h3>
-          <br />
-          <select
-            class="form-select form-select-xs mb-3"
-            aria-label=".form-select-lg example"
-            value={selected}
-            onChange={handleChange}
-          >
-            {options.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.text}
-              </option>
-            ))}
-          </select>
-          {/* {dniTygodnia} */}
-          <Col>
-            <h4>Poniedziałek</h4>
-          </Col>
-          <Col>
-            <h4>Wtorek</h4>
-          </Col>
-          <Col>
-            <h4>Środa</h4>
-          </Col>
-          <Col>
-            <h4>Czwartek</h4>
-          </Col>
-          <Col>
-            <h4>Piątek</h4>
-          </Col>
-        </div>
+        <h3>Terminarz</h3>
+        <br />
+        <select
+          class="form-select form-select-xs mb-3"
+          aria-label=".form-select-lg example"
+          value={selected}
+          onChange={handleChange}
+        >
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.text}
+            </option>
+          ))}
+        </select>
+        {/* {dniTygodnia} */}
+        <Col>
+          <h4>Poniedziałek</h4>
+        </Col>
+        <Col>
+          <h4>Wtorek</h4>
+        </Col>
+        <Col>
+          <h4>Środa</h4>
+        </Col>
+        <Col>
+          <h4>Czwartek</h4>
+        </Col>
+        <Col>
+          <h4>Piątek</h4>
+        </Col>
       </Row>
 
       <Row>
