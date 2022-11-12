@@ -43,20 +43,22 @@ const Grades = () => {
             <tr>
               <td>Matematyka</td>
               <td>
-                <Row className="px-2">
+                <Row className="row-cols-2 row-cols-lg-6 g-2 g-lg-1">
                   <Col><div class="h-100 w-80 sprawdzian">5</div></Col>
+                  <Col><div class="h-100 w-80 aktywnosc">5</div></Col>
+                  <Col><div class="h-100 w-80 kartkowka">3+</div></Col>
                   <Col><div class="h-100 w-80 aktywnosc">5</div></Col>
                   <Col><div class="h-100 w-80 kartkowka">3+</div></Col>
                   <Col><div class="h-100 w-80 aktywnosc">5</div></Col>
                 </Row>
               </td>
               <td>
-              <Row className="px-2">
+              <Row className="row-cols-2 row-cols-lg-6 g-2 g-lg-1">
                   <Col className="col-lg-2 h-100 w-80 propozycja">5</Col>
                 </Row>
               </td>
               <td>
-              <Row className="px-2">
+              <Row className="row-cols-2 row-cols-lg-6 g-2 g-lg-1">
                   <Col className="col-lg-2 h-100 w-80 koncowa">5</Col>
                 </Row>
               </td>
@@ -64,20 +66,21 @@ const Grades = () => {
             <tr>
               <td>Przyroda</td>
               <td>
-              <Row className="px-2">
+                
+              <Row className="row-cols-2 row-cols-lg-6 g-2 g-lg-1">
                   <Col><div class="h-100 w-80 sprawdzian">5</div></Col>
                   <Col><div class="h-100 w-80 aktywnosc">5</div></Col>
-                  <Col><div class="h-100 w-80 kartkowka">3+</div></Col>
-                  <Col><div class="h-100 w-80 aktywnosc">5</div></Col>
+
                 </Row>
+                
               </td>
               <td>
-              <Row className="px-2">
+              <Row className="row-cols-2 row-cols-lg-6 g-2 g-lg-1">
                   <Col className="col-lg-2 h-100 w-80 propozycja">5</Col>
                 </Row>
               </td>
               <td>
-              <Row className="px-2">
+              <Row className="row-cols-2 row-cols-lg-6 g-2 g-lg-1">
                   <Col className="col-lg-2 h-100 w-80 koncowa">5</Col>
                 </Row>
               </td>
@@ -85,7 +88,7 @@ const Grades = () => {
             <tr>
               <td>Wychowanie Fizyczne</td>
               <td>
-              <Row className="px-2">
+              <Row className="row-cols-2 row-cols-lg-6 g-2 g-lg-1">
                   <Col><div class="h-100 w-80 sprawdzian">5</div></Col>
                   <Col><div class="h-100 w-80 aktywnosc">5</div></Col>
                   <Col><div class="h-100 w-80 kartkowka">3+</div></Col>
@@ -93,12 +96,12 @@ const Grades = () => {
                 </Row>
               </td>
               <td>
-              <Row className="px-2">
+              <Row className="row-cols-2 row-cols-lg-6 g-2 g-lg-1">
                   <Col className="col-lg-2 h-100 w-80 propozycja">5</Col>
                 </Row>
               </td>
               <td>
-              <Row className="px-2">
+              <Row className="row-cols-2 row-cols-lg-6 g-2 g-lg-1">
                   <Col className="col-lg-2 h-100 w-80 koncowa">5</Col>
                 </Row>
               </td>
