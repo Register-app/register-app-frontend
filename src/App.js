@@ -9,8 +9,10 @@ import Login from "components/Login";
 import ButtonRow from "components/ButtonRow";
 import LessonPlan from "pages/LessonPlan";
 import Frequency from "pages/Frequency";
+import AddFrequency from "pages/AddFrequency";
 import Messages from "pages/Messages";
 import Grades from "pages/Grades";
+import AddGrade from "pages/AddGrade";
 import Timetable from "pages/Timetable";
 import NotFound from "components/NotFound";
 import Unauthorized from "components/Unauthorized";
@@ -34,6 +36,8 @@ const App = () => {
             <Route path="/" element={<Summary />} />
             <Route path="lesson-plan" element={<LessonPlan />} />
             <Route path="grades" element={<Grades />} />
+            <Route path="addgrade" element={<AddGrade />} />
+            <Route path="addfrequency" element={<AddFrequency />} />
             <Route path="timetable" element={<Timetable />} />
             <Route
               path="messages"
