@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Row, Table } from "react-bootstrap";
+import { Container, Row, Table, Col } from "react-bootstrap";
 import ValueSelect from "components/ValueSelect";
 
 const Grades = () => {
@@ -43,64 +43,64 @@ const Grades = () => {
             <tr>
               <td>Matematyka</td>
               <td>
-                <div class="row px-2">
-                  <div class="col-2 sprawdzian">5</div>
-                  <div class="col-2 aktywnosc">5</div>
-                  <div class="col-2 kartkowka">3+</div>
-                  <div class="col-2 aktywnosc">5</div>
-                </div>
+                <Row className="px-2">
+                  <Col><div class="h-100 w-80 sprawdzian">5</div></Col>
+                  <Col><div class="h-100 w-80 aktywnosc">5</div></Col>
+                  <Col><div class="h-100 w-80 kartkowka">3+</div></Col>
+                  <Col><div class="h-100 w-80 aktywnosc">5</div></Col>
+                </Row>
               </td>
               <td>
-                <div class="row px-2">
-                  <div class="col-2 propozycja">3-</div>
-                </div>
+              <Row className="px-2">
+                  <Col className="col-lg-2 h-100 w-80 propozycja">5</Col>
+                </Row>
               </td>
               <td>
-                <div class="row px-2">
-                  <div class="col-2 koncowa">3</div>
-                </div>
+              <Row className="px-2">
+                  <Col className="col-lg-2 h-100 w-80 koncowa">5</Col>
+                </Row>
               </td>
             </tr>
             <tr>
               <td>Przyroda</td>
               <td>
-                <div class="row px-2">
-                  <div class="col-2 sprawdzian">3</div>
-                  <div class="col-2 aktywnosc">2</div>
-                  <div class="col-2 kartkowka">3+</div>
-                  <div class="col-2 aktywnosc">5</div>
-                </div>
+              <Row className="px-2">
+                  <Col><div class="h-100 w-80 sprawdzian">5</div></Col>
+                  <Col><div class="h-100 w-80 aktywnosc">5</div></Col>
+                  <Col><div class="h-100 w-80 kartkowka">3+</div></Col>
+                  <Col><div class="h-100 w-80 aktywnosc">5</div></Col>
+                </Row>
               </td>
               <td>
-                <div class="row px-2">
-                  <div class="col-2 propozycja">4+</div>
-                </div>
+              <Row className="px-2">
+                  <Col className="col-lg-2 h-100 w-80 propozycja">5</Col>
+                </Row>
               </td>
               <td>
-                <div class="row px-2">
-                  <div class="col-2 koncowa">4</div>
-                </div>
+              <Row className="px-2">
+                  <Col className="col-lg-2 h-100 w-80 koncowa">5</Col>
+                </Row>
               </td>
             </tr>
             <tr>
               <td>Wychowanie Fizyczne</td>
               <td>
-                <div class="row px-2">
-                  <div class="col-2 sprawdzian">4+</div>
-                  <div class="col-2 aktywnosc">3=</div>
-                  <div class="col-2 kartkowka">3+</div>
-                  <div class="col-2 aktywnosc">5</div>
-                </div>
+              <Row className="px-2">
+                  <Col><div class="h-100 w-80 sprawdzian">5</div></Col>
+                  <Col><div class="h-100 w-80 aktywnosc">5</div></Col>
+                  <Col><div class="h-100 w-80 kartkowka">3+</div></Col>
+                  <Col><div class="h-100 w-80 aktywnosc">5</div></Col>
+                </Row>
               </td>
               <td>
-                <div class="row px-2">
-                  <div class="col-2 propozycja">2</div>
-                </div>
+              <Row className="px-2">
+                  <Col className="col-lg-2 h-100 w-80 propozycja">5</Col>
+                </Row>
               </td>
               <td>
-                <div class="row px-2">
-                  <div class="col-2 koncowa">2</div>
-                </div>
+              <Row className="px-2">
+                  <Col className="col-lg-2 h-100 w-80 koncowa">5</Col>
+                </Row>
               </td>
             </tr>
           </tbody>
