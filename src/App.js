@@ -9,29 +9,44 @@ import Login from "components/Login";
 import ButtonRow from "components/ButtonRow";
 import LessonPlan from "pages/LessonPlan";
 import Frequency from "pages/Frequency";
-import AddFrequency from "pages/AddFrequency";
 import Messages from "pages/Messages";
 import Grades from "pages/Grades";
 import Timetable from "pages/Timetable";
-import Logout from "components/Logout";
-import AddGrade from "pages/AddGrade";
+import NotFound from "components/NotFound";
+import Unauthorized from "components/Unauthorized";
+import Layout from "components/Layout";
+import RequireAuth from "components/RequireAuth";
+import useAuth from "./hooks/useAuth";
+import { MessagesProvider } from "context/MessagesProvider";
 
 const App = () => {
+  const { user } = useAuth();
+
   return (
     <div className="App">
       <Header />
-      <ButtonRow />
+      {user && <ButtonRow />}
       <Routes>
-        <Route path="/" element={<Summary />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/lesson-plan" element={<LessonPlan />} />
-        <Route path="/grades" element={<AddGrade />} />
-        <Route path="/grades2" element={<Grades />} />
-        <Route path="/timetable" element={<Timetable />} />
-        <Route path="/messages" element={<Messages />} />
-        <Route path="/frequency2" element={<Frequency />} />
-        <Route path="/frequency" element={<AddFrequency />} />
-        <Route path="/logout" element={<Logout />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="login" element={<Login />} />
+          <Route path="unauthorized" element={<Unauthorized />} />
+          <Route element={<RequireAuth allowedRoles={["USER"]} />}>
+            <Route path="/" element={<Summary />} />
+            <Route path="lesson-plan" element={<LessonPlan />} />
+            <Route path="grades" element={<Grades />} />
+            <Route path="timetable" element={<Timetable />} />
+            <Route
+              path="messages"
+              element={
+                <MessagesProvider>
+                  <Messages />
+                </MessagesProvider>
+              }
+            />
+            <Route path="frequency" element={<Frequency />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Route>
       </Routes>
       <Footer />
     </div>

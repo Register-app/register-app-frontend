@@ -31,7 +31,14 @@ code {
 .Messages,
 .LessonPlan,
 .Grades,
-.Frequency {
+.Frequency,
+.NotFound,
+.Layout,
+.Outlet {
     flex-grow: 1;
     overflow-y: auto;
+}
+
+.Navigation {
+    margin-bottom: 15px;
 }

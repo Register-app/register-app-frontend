@@ -20,11 +20,8 @@ const Grades = () => {
 
   return (
     <Container className="Grades justify-content-md-center">
-      <Row className="text-center">
-        <div class="row gy-3">
-          <h3>Oceny</h3>
-          <br />
-        </div>
+      <Row className="text-center mb-2">
+        <h3>Oceny</h3>
       </Row>
       <div>
         <ValueSelect options={options} value={selected} onChange={handleChange}/>

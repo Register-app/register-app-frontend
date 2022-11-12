@@ -6,7 +6,7 @@ import "./style/custom.css";
 
 const ButtonRow = () => {
   return (
-    <Container>
+    <Container className="Navigation">
       <Row className="text-center mt-3">
         <Col>
           <Link to="/lesson-plan" class="btn btn-primary">
