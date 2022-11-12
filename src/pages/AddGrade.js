@@ -58,23 +58,12 @@ const AddGrade = () => {
   ];
 
 
-// console.log(grades.length);
-
-// classes.classes.forEach(obj => {
-//     console.log(obj);
-//     // klasa.set(obj.klasa_id,obj.klasa)
-//     // klasa.push(obj.klasa);
-//   });
-
-  // klasa.forEach((values,keys)=>{
-  //   console.log(values)
-  // })
   
-console.log(students);
+// console.log(students);
 
-students.forEach(obj =>{
-  console.log(obj.second_name)
-})
+// students.forEach(obj =>{
+//   console.log(obj.second_name)
+// })
 
 
 
@@ -214,14 +203,8 @@ students.forEach(obj =>{
   }
   </>)
 
-  
-
-    
-  
-  
 }
 
-  
   return (
     <Container className="Frequency justify-content-md-center">
       <Row className="justify-content-md-center text-center">
@@ -259,9 +242,9 @@ students.forEach(obj =>{
             </tr>
           </thead>
           <tbody>
+
           {studentsList(students)}
 
-           
           </tbody>
         </Table>
                 <Row>

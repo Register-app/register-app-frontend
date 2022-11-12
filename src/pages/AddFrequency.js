@@ -14,6 +14,24 @@ const AddFrequency = () => {
     { "klasa_id": "2", "klasa": "VI B" },
   ];
 
+  var students = [
+    {
+      "student_id":"1",
+      "name":"Jan",
+      "second_name":"Kowal",
+  },
+  {
+    "student_id":"53",
+    "name":"Janina",
+    "second_name":"Bareja",
+},
+{
+  "student_id":"64",
+  "name":"Karolina",
+  "second_name":"Turban",
+}
+  ];
+
   const frekwencjaOptions = [
     { value: "brak", text: "brak" },
     { value: "obecny", text: "obecny" },
@@ -61,6 +79,28 @@ const AddFrequency = () => {
     setSelectedDate(event.target.value);
   };
 
+  function studentsList(students){
+    var i=0;
+    return(
+      <>
+      {students.map(student =>{
+        i++;
+        return(
+          
+              <tr>
+                <td>{i}</td>
+                <td>{student.name+' '+student.second_name}</td>
+                <td><ValueSelect id={student.student_id} options={frekwencjaOptions} value={selected} onChange={handleChangeFrequency}/></td>
+              </tr>
+             
+              )
+              
+          })
+    }
+    </>)
+  
+  }
+
   
   return (
     <Container className="Frequency justify-content-md-center">
@@ -90,38 +130,9 @@ const AddFrequency = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Mark</td>
-                      <td><ValueSelect id='1' options={frekwencjaOptions} value={selected} onChange={handleChangeFrequency}/></td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Jacob</td>
-                      <td><ValueSelect id='2' options={frekwencjaOptions} value={selected} onChange={handleChangeFrequency}/></td>
 
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Larry the Bird</td>
-                      <td><ValueSelect id='3' options={frekwencjaOptions} value={selected} onChange={handleChangeFrequency}/></td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Mark</td>
-                      <td><ValueSelect id='4' options={frekwencjaOptions} value={selected} onChange={handleChangeFrequency}/></td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>Jacob</td>
-                      <td><ValueSelect id='5' options={frekwencjaOptions} value={selected} onChange={handleChangeFrequency}/></td>
-
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>Larry the Bird</td>
-                      <td><ValueSelect id='6' options={frekwencjaOptions} value={selected} onChange={handleChangeFrequency}/></td>
-                    </tr>
+                   {studentsList(students)}
+                   
                   </tbody>
                 </Table>
                 <Row>
