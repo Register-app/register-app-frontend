@@ -12,12 +12,19 @@ const WEBSOCKET_URL = "http://localhost:8080/ws";
 const GET_USERS_URL = "/v1/users";
 const GET_MESSAGES_URL = "/v1/messages/listmessage";
 
-let stompClient;
-
 const Sidebar = () => {
   const { user } = useAuth();
-  const { users, setUsers, userMsg, setUserMsg, setMessages, setStompClient } =
-    useMessages();
+  const {
+    users,
+    setUsers,
+    userMsg,
+    setUserMsg,
+    setMessages,
+    setStompClient,
+    subscription,
+    setSubscription,
+  } = useMessages();
+  let { stompClient } = useMessages();
 
   const axios = useAxios();
   const navigate = useNavigate();
@@ -33,32 +40,58 @@ const Sidebar = () => {
         navigate("/login", { state: { from: location }, replace: true });
       }
     };
-
     getUsers();
-  }, [axios, location, navigate, setUsers]);
+
+    if (userMsg) {
+      connect();
+    }
+
+    return () => {
+      disconnect();
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userMsg]);
+
+  const disconnect = () => {
+    if (subscription) {
+      subscription.unsubscribe();
+    }
+    if (stompClient) {
+      stompClient.disconnect();
+    }
+  };
 
   const handleUserMsg = (usr) => {
-    connect();
     setUserMsg(usr);
     getMessages(usr);
   };
 
-  const connect = async () => {
+  const connect = () => {
     const Sock = new SockJS(WEBSOCKET_URL);
-    if (!stompClient) {
+    if (!stompClient || !stompClient?.connected) {
       stompClient = over(Sock);
-      setStompClient(over(Sock));
-      await stompClient.connect({}, setTimeout(onConnected, 500));
+      setStompClient(stompClient);
+      stompClient.connect({}, setTimeout(onConnected, 500));
     }
   };
 
   const onConnected = () => {
-    stompClient.subscribe("/user/messages/" + user.user_id, onMessage);
+    const subscription = stompClient.subscribe(
+      "/user/messages/" + user.user_id,
+      onMessage
+    );
+    setSubscription(subscription);
   };
 
-  const onMessage = (response) => {
-    const data = JSON.parse(response.body);
-    setMessages((prevArray) => [...prevArray, data]);
+  const onMessage = (payload) => {
+    const message = JSON.parse(payload.body);
+    console.log(message.receiver_id);
+    console.log(userMsg.user_id);
+    if (message.sender_id === userMsg.user_id) {
+      setMessages((messages) => [...messages, message]);
+    }
+    //getMessages(userMsg);
   };
 
   const getMessages = async (usr) => {
