@@ -4,6 +4,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import Login from "./Login";
 
 const Logout = () => {
+  
+  localStorage.clear();
   return (
     <Container className="justify-content-md-center">
       <div class="mt-5 col-md-12">
@@ -14,7 +16,7 @@ const Logout = () => {
             </Col>
           </center>
 
-          <Login />
+          {/* <Login /> */}
         </Row>
       </div>
       {/* pusty div do zwiekszenia odstepu od footera */}

@@ -17,6 +17,7 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginInfo, setInfo] = useState("Aby przejść dalej musisz być zalogowany!");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,12 +33,16 @@ const Login = () => {
     } catch (error) {
       if (!error?.response) {
         console.error("Brak odpowiedzi ze strony serwera", error);
+        setInfo("Brak odpowiedzi ze strony serwera");
       } else if (error.response?.status === 400) {
         console.error("Niepodany email lub hasło");
+        setInfo("Niepodany email lub hasło");
       } else if (error.response?.status === 401) {
         console.error("Brak autoryzacji");
+        setInfo("Brak autoryzacji");
       } else {
         console.error("Błąd logowania");
+        setInfo("Błąd logowania");
       }
     }
   };
@@ -49,8 +54,10 @@ const Login = () => {
           <center>
             <Col className="col-md-4">
               <Form onSubmit={handleSubmit}>
-                <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-
+                <h1 class="h3 mb-3 fw-normal">Zaloguj się</h1>
+                <div class="alert alert-danger" role="alert"> 
+                {loginInfo}
+                </div>
                 <Col className="form-floating">
                   <input
                     type="email"

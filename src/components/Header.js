@@ -11,9 +11,11 @@ const Header = () => {
 
   const navigate = useNavigate();
 
-  const handleClick = (e) => {
+  const handleLogout = (e) => {
     e.preventDefault();
+    localStorage.clear();
     navigate("/logout");
+    document.location.reload(false);
   };
 
   return (
@@ -55,7 +57,7 @@ const Header = () => {
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="/logout">
-                    <Button onClick={handleClick}>Wyloguj</Button>
+                    <Button onClick={handleLogout}>Wyloguj</Button>
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav.Link>

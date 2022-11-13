@@ -19,6 +19,7 @@ import Unauthorized from "components/Unauthorized";
 import Layout from "components/Layout";
 import RequireAuth from "components/RequireAuth";
 import useAuth from "./hooks/useAuth";
+import Logout from "components/Logout";
 import { MessagesProvider } from "context/MessagesProvider";
 
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
             <Route path="addgrade" element={<AddGrade />} />
             <Route path="addfrequency" element={<AddFrequency />} />
             <Route path="timetable" element={<Timetable />} />
+            <Route path="logout" element={<Logout />} />
             <Route
               path="messages"
               element={
