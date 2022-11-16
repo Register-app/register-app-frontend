@@ -1,4 +1,4 @@
-import ClassSelect from "components/form/classSelect";
+import ClassSelect from "components/form/ClassSelect";
 import DatePicker from "components/form/datePicker";
 import GradeValue from "components/form/gradeValue";
 import ValueSelect from "components/form/valueSelect";

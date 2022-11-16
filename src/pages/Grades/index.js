@@ -6,10 +6,10 @@ const Grades = () => {
   return (
     <Container className="Grades justify-content-md-center">
       <Row>
-        <Col md={8}>
+        <Col md={9}>
           <GradesTable />
         </Col>
-        <Col md={4}>
+        <Col md={3}>
           <GradesButtons />
         </Col>
       </Row>

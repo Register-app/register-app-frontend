@@ -10,6 +10,8 @@ import Login from "components/form/Login";
 import Header from "components/header";
 import Layout from "components/layout";
 import { MessagesProvider } from "context/MessagesProvider";
+import Navigation from "components/navigation";
+import { GradesProvider } from "context/GradesProvider";
 import Attendances from "pages/Attendances";
 import AddFrequency from "pages/Attendances/AddFrequency";
 import Grades from "pages/Grades";
@@ -19,7 +21,6 @@ import Schedule from "pages/Schedule";
 import Summary from "pages/Summary";
 import Timetable from "pages/Timetable";
 import useAuth from "./hooks/useAuth";
-import Navigation from "components/navigation";
 
 const App = () => {
   const { user } = useAuth();
@@ -35,7 +36,14 @@ const App = () => {
           <Route element={<RequireAuth allowedRoles={["USER"]} />}>
             <Route path="/" element={<Summary />} />
             <Route path="lesson-plan" element={<Schedule />} />
-            <Route path="grades" element={<Grades />} />
+            <Route
+              path="grades"
+              element={
+                <GradesProvider>
+                  <Grades />
+                </GradesProvider>
+              }
+            />
             <Route path="addgrade" element={<AddGrade />} />
             <Route path="addfrequency" element={<AddFrequency />} />
             <Route path="timetable" element={<Timetable />} />

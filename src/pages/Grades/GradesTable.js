@@ -1,178 +1,227 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import "pages/Grades/GradesTable.css";
-import { Table } from "react-bootstrap";
-
-const grades = [
-  {
-    student_id: "1",
-    grade_id: "1",
-    subject: "Przyroda",
-    category: "kartkowka",
-    grade: "5",
-  },
-  {
-    student_id: "1",
-    grade_id: "2",
-    subject: "Przyroda",
-    category: "sprawdzian",
-    grade: "2",
-  },
-  {
-    student_id: "2",
-    grade_id: "3",
-    subject: "Przyroda",
-    category: "aktywnosc",
-    grade: "2",
-  },
-  {
-    student_id: "2",
-    grade_id: "4",
-    subject: "Przyroda",
-    category: "aktywnosc",
-    grade: "2",
-  },
-  {
-    student_id: "3",
-    grade_id: "5",
-    subject: "Przyroda",
-    category: "aktywnosc",
-    grade: "2",
-  },
-  {
-    student_id: "3",
-    grade_id: "6",
-    subject: "Przyroda",
-    category: "aktywnosc",
-    grade: "2",
-  },
-];
-
-const students = [
-  {
-    student_id: "1",
-    name: "Jan",
-    second_name: "Kowal",
-  },
-  {
-    student_id: "2",
-    name: "Janina",
-    second_name: "Bareja",
-  },
-  {
-    student_id: "3",
-    name: "Karolina",
-    second_name: "Turban",
-  },
-];
-
-const classes = [
-  { klasa_id: "1", klasa: "VII A" },
-  { klasa_id: "2", klasa: "VI B" },
-  { klasa_id: "3", klasa: "IV C" },
-];
+import { Container, Table } from "react-bootstrap";
+import useGrades from "hooks/useGrades";
 
 const GradesTable = () => {
-  const [studentState, setStudentState] = useState({});
-  const [gradeState, setGradeState] = useState({});
-  const [activeStudent, setActiveStudent] = useState("");
-  const [activeGrade, setActiveGrade] = useState("");
+  const {
+    student,
+    setStudent,
+    grade,
+    setGrade,
+    grades,
+    setGrades,
+    students,
+    setStudents,
+    classes,
+    setClasses,
+    selectedClass,
+    setSelectedClass,
+    weight,
+    setWeight,
+    category,
+    setCategory,
+    subject,
+    setSubject,
+    gradeValue,
+    setGradeValue,
+    gradeId,
+    setGradeId,
+    studentId,
+    setStudentId,
+    classId,
+    setClassId,
+    studentName,
+    setStudentName,
+    studentSecondName,
+    setStudentSecondName,
+    className,
+    setClassName,
+  } = useGrades();
+
+  useEffect(() => {
+    setStudents([
+      {
+        student_id: "1",
+        name: "Jan",
+        second_name: "Kowal",
+      },
+      {
+        student_id: "2",
+        name: "Janina",
+        second_name: "Bareja",
+      },
+      {
+        student_id: "3",
+        name: "Karolina",
+        second_name: "Turban",
+      },
+    ]);
+
+    setGrades([
+      {
+        student_id: "1",
+        grade_id: "1",
+        subject: "Przyroda",
+        category: "Kartkówka",
+        text: "5",
+      },
+      {
+        student_id: "1",
+        grade_id: "2",
+        subject: "Przyroda",
+        category: "Sprawdzian",
+        text: "2",
+      },
+      {
+        student_id: "2",
+        grade_id: "3",
+        subject: "Przyroda",
+        category: "Aktywność",
+        text: "2",
+      },
+      {
+        student_id: "2",
+        grade_id: "4",
+        subject: "Przyroda",
+        category: "Aktywność",
+        text: "2",
+      },
+      {
+        student_id: "3",
+        grade_id: "5",
+        subject: "Przyroda",
+        category: "Aktywność",
+        text: "2",
+      },
+      {
+        student_id: "3",
+        grade_id: "6",
+        subject: "Przyroda",
+        category: "Aktywność",
+        text: "2",
+      },
+    ]);
+  }, []);
 
   const handleSetStudent = (student) => {
-    setStudentState(student);
-    setActiveStudent(student.student_id);
-    setActiveGrade("");
+    setStudent(student);
+    setGrade("");
     console.log(student);
   };
 
   const handleSetGrade = (grade) => {
-    setGradeState(grade);
-    setActiveGrade(grade.grade_id);
-    setActiveStudent("");
+    setGrade(grade);
+    setStudent("");
     console.log(grade);
   };
 
   return (
     <>
-      {students?.length ? (
-        <Table striped bordered hover responsive="sm">
-          <thead>
-            <tr>
-              <th>Numer</th>
-              <th>Imie i nazwisko</th>
-              <th>Oceny cząstkowe</th>
-              <th>Ocena proponowana</th>
-              <th>Ocena końcowa</th>
-            </tr>
-          </thead>
-          <tbody>
-            {students.map((student, idx) => (
-              <tr
-                className={
-                  activeStudent === student.student_id ? "activeStudent" : ""
-                }
-              >
-                <td
-                  key={idx}
-                  onClick={() => handleSetStudent(student)}
-                  style={{ cursor: "pointer" }}
-                >
-                  {idx}
-                </td>
-
-                <td>
-                  {student.name} {student.second_name}
-                </td>
-                <td>
-                  {grades.map((grade) => (
-                    <div
-                      key={grade.grade_id}
-                      onClick={() => handleSetGrade(grade)}
-                      style={{ cursor: "pointer" }}
-                      className={
-                        activeGrade === grade.grade_id ? "activeGrade" : ""
-                      }
-                    >
-                      {grade.student_id === student.student_id
-                        ? grade.grade
-                        : ""}
-                    </div>
-                  ))}
-                </td>
-                <td>
-                  {grades.map((grade) => (
-                    <div
-                      key={grade.grade_id}
-                      onClick={() => handleSetGrade(grade)}
-                      style={{ cursor: "pointer" }}
-                      className={
-                        activeGrade === grade.grade_id ? "activeGrade" : ""
-                      }
-                    >
-                      {grade.student_id === student.student_id ? "2" : ""}
-                    </div>
-                  ))}
-                </td>
-                <td>
-                  {grades.map((grade) => (
-                    <div
-                      key={grade.grade_id}
-                      onClick={() => handleSetGrade(grade)}
-                      style={{ cursor: "pointer" }}
-                      className={
-                        activeGrade === grade.grade_id ? "activeGrade" : ""
-                      }
-                    >
-                      {grade.student_id === student.student_id ? "2" : ""}
-                    </div>
-                  ))}
-                </td>
+      <Container className="GradesTable" fluid>
+        {students?.length ? (
+          <Table striped bordered hover responsive="sm" fluid>
+            <thead>
+              <tr>
+                <th>Numer</th>
+                <th>Imie i nazwisko</th>
+                <th>Oceny cząstkowe</th>
+                <th>Ocena Proponowana</th>
+                <th>Ocena Końcowa</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      ) : (
-        <p>Brak uczniów</p>
-      )}
+            </thead>
+            <tbody>
+              {students.map((std, idx) => (
+                <tr
+                  className={
+                    student?.student_id === std.student_id
+                      ? "activeStudent"
+                      : ""
+                  }
+                >
+                  <td
+                    key={idx}
+                    onClick={() => handleSetStudent(std)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    {idx}
+                  </td>
+
+                  <td>
+                    {std.name} {std.second_name}
+                  </td>
+                  <td>
+                    <div className="grades">
+                      {grades.map((grd) =>
+                        grd.student_id === std.student_id &&
+                        grd.category !== "Propozycja" &&
+                        grd.category !== "Końcowa" ? (
+                          <div
+                            key={grd.grade_id}
+                            onClick={() => handleSetGrade(grd)}
+                            style={{ cursor: "pointer" }}
+                            className={
+                              grd.grade_id === grade?.grade_id
+                                ? `activeGrade ${grd.category}`
+                                : grd.category
+                            }
+                          >
+                            {grd.text}
+                          </div>
+                        ) : null
+                      )}
+                    </div>
+                  </td>
+                  <td>
+                    <div className="proposed-grade">
+                      {grades.map((grd) =>
+                        grd.student_id === std.student_id &&
+                        grd.category === "Propozycja" ? (
+                          <div
+                            key={grd.grade_id}
+                            onClick={() => handleSetGrade(grd)}
+                            style={{ cursor: "pointer" }}
+                            className={
+                              grd.grade_id === grade.grade_id
+                                ? `activeGrade ${grd.category}`
+                                : grd.category
+                            }
+                          >
+                            {grd.text}
+                          </div>
+                        ) : null
+                      )}
+                    </div>
+                  </td>
+                  <td>
+                    <div className="final-grade">
+                      {grades.map((grd) =>
+                        grd.student_id === std.student_id &&
+                        grd.category === "Końcowa" ? (
+                          <div
+                            key={grd.grade_id}
+                            onClick={() => handleSetGrade(grd)}
+                            style={{ cursor: "pointer" }}
+                            className={
+                              grd.grade_id === grade.grade_id
+                                ? `activeGrade ${grd.category}`
+                                : grd.category
+                            }
+                          >
+                            {grd.text}
+                          </div>
+                        ) : null
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        ) : (
+          <p>Brak uczniów</p>
+        )}
+      </Container>
     </>
   );
 };

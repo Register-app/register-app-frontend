@@ -1,4 +1,73 @@
-.activeGrade,
-.activeStudent {
-    background-color: #03b488;
+.GradesTable .activeStudent {
+    background-color: rgb(154, 173, 255);
+    transition: background-color 100ms linear;
+}
+
+.GradesTable .grades,
+.GradesTable .proposed-grade,
+.GradesTable .final-grade {
+    display: flex;
+}
+
+.GradesTable .grades div,
+.GradesTable .proposed-grade div,
+.GradesTable .final-grade div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+    border-radius: 10px;
+    border: 1px solid grey;
+}
+
+.GradesTable .activeGrade {
+    transform: scale(0.9);
+    transition: transform 200ms ease-in-out;
+}
+
+.GradesTable .Sprawdzian {
+    /* height: 100px;
+    width: 50px; */
+    text-align: center;
+    font-weight: bold;
+    background-color: red;
+    padding: 5px;
+}
+
+.GradesTable .Kartkówka {
+    /* height: 100px;
+    width: 50px; */
+    text-align: center;
+    font-weight: bold;
+    background-color: green;
+    padding: 5px;
+}
+
+.GradesTable .Aktywność {
+    /* height: 100px;
+    width: 50px; */
+    text-align: center;
+    font-weight: bold;
+    background-color: orange;
+    padding: 5px;
+}
+
+.GradesTable .Propozycja {
+    /* height: 100px;
+    width: 50px; */
+    text-align: center;
+    font-weight: bold;
+    background-color: rgb(131, 177, 236);
+    padding: 5px;
+}
+
+.GradesTable .Końcowa {
+    /* height: 100px;
+    width: 50px; */
+    text-align: center;
+    font-weight: bold;
+    background-color: rgb(106, 110, 143);
+    padding: 5px;
 }
