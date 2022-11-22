@@ -1,4 +1,5 @@
 import logo from "assets/logo.PNG";
+import useLogout from "hooks/useLogout";
 import {
   Button,
   Col,
@@ -8,12 +9,16 @@ import {
   Row,
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const handleLogout = (e) => {
-    e.preventDefault();
-    localStorage.clear();
-    window.location.replace("/");
+  const logout = useLogout();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleLogout = async () => {
+    logout();
+    navigate("/", { state: { from: location }, replace: true });
   };
 
   return (

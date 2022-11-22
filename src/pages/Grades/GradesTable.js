@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "pages/Grades/GradesTable.css";
-import { Container, Table } from "react-bootstrap";
+import { Col, Container, Row, Table } from "react-bootstrap";
 import useGrades from "hooks/useGrades";
 
 const GradesTable = () => {
@@ -13,12 +13,14 @@ const GradesTable = () => {
     setGrades,
     students,
     setStudents,
+    gradeCategory,
+    setGradeCategory,
     classes,
     setClasses,
     selectedClass,
     setSelectedClass,
-    weight,
-    setWeight,
+    gradeWeight,
+    setGradeWeight,
     category,
     setCategory,
     subject,
@@ -42,17 +44,17 @@ const GradesTable = () => {
   useEffect(() => {
     setStudents([
       {
-        student_id: "1",
+        student_id: 1,
         name: "Jan",
         second_name: "Kowal",
       },
       {
-        student_id: "2",
+        student_id: 2,
         name: "Janina",
         second_name: "Bareja",
       },
       {
-        student_id: "3",
+        student_id: 3,
         name: "Karolina",
         second_name: "Turban",
       },
@@ -60,46 +62,58 @@ const GradesTable = () => {
 
     setGrades([
       {
-        student_id: "1",
-        grade_id: "1",
+        student_id: 1,
+        grade_id: 1,
         subject: "Przyroda",
         category: "Kartkówka",
         text: "5",
+        weight: 1,
+        value: 5,
       },
       {
-        student_id: "1",
-        grade_id: "2",
+        student_id: 1,
+        grade_id: 2,
         subject: "Przyroda",
         category: "Sprawdzian",
         text: "2",
+        weight: 2,
+        value: 2,
       },
       {
-        student_id: "2",
-        grade_id: "3",
+        student_id: 2,
+        grade_id: 3,
         subject: "Przyroda",
         category: "Aktywność",
         text: "2",
+        weight: 1,
+        value: 2,
       },
       {
-        student_id: "2",
-        grade_id: "4",
+        student_id: 2,
+        grade_id: 4,
         subject: "Przyroda",
         category: "Aktywność",
         text: "2",
+        weight: 1,
+        value: 2,
       },
       {
-        student_id: "3",
-        grade_id: "5",
+        student_id: 3,
+        grade_id: 5,
         subject: "Przyroda",
         category: "Aktywność",
         text: "2",
+        weight: 1,
+        value: 2,
       },
       {
-        student_id: "3",
-        grade_id: "6",
+        student_id: 3,
+        grade_id: 6,
         subject: "Przyroda",
         category: "Aktywność",
         text: "2",
+        weight: 1,
+        value: 2,
       },
     ]);
   }, []);
@@ -107,117 +121,203 @@ const GradesTable = () => {
   const handleSetStudent = (student) => {
     setStudent(student);
     setGrade("");
-    console.log(student);
+    if (gradeCategory === "Propozycja" || gradeCategory === "Końcowa") {
+      setGradeCategory("");
+    }
   };
 
-  const handleSetGrade = (grade) => {
+  const handleSetStudentProposedGrade = (e, student) => {
+    e.stopPropagation();
+    if (
+      !grades.find(
+        (grd) =>
+          grd.student_id === student.student_id && grd.category === "Propozycja"
+      )
+    ) {
+      setStudent(student);
+      setGradeCategory("Propozycja");
+      setGrade("");
+    }
+  };
+
+  const handleSetStudentFinalGrade = (e, student) => {
+    e.stopPropagation();
+    if (
+      !grades.find(
+        (grd) =>
+          grd.student_id === student.student_id && grd.category === "Końcowa"
+      )
+    ) {
+      setStudent(student);
+      setGradeCategory("Końcowa");
+      setGrade("");
+    }
+  };
+
+  const handleSetGrade = (e, grade) => {
+    e.stopPropagation();
     setGrade(grade);
     setStudent("");
-    console.log(grade);
+    setGradeCategory(grade.category);
+    setGradeWeight(grade.weight);
+  };
+
+  const calculateAvg = (grades, std) => {
+    let studentGrades = grades.filter(
+      (grd) =>
+        grd.student_id === std.student_id &&
+        grd.category !== "Propozycja" &&
+        grd.category !== "Końcowa"
+    );
+    let numerator = 0;
+    let denominator = 0;
+    studentGrades.forEach((grade) => {
+      numerator = numerator + grade.weight * grade.value;
+      denominator = denominator + grade.weight;
+    });
+    return (numerator / denominator).toFixed(2);
   };
 
   return (
     <>
-      <Container className="GradesTable" fluid>
+      <Container className="GradesTable border">
         {students?.length ? (
-          <Table striped bordered hover responsive="sm" fluid>
-            <thead>
-              <tr>
-                <th>Numer</th>
-                <th>Imie i nazwisko</th>
-                <th>Oceny cząstkowe</th>
-                <th>Ocena Proponowana</th>
-                <th>Ocena Końcowa</th>
-              </tr>
-            </thead>
-            <tbody>
-              {students.map((std, idx) => (
-                <tr
+          <>
+            <Row md={8}>
+              <Col md={1} className="border">
+                Numer
+              </Col>
+              <Col md={2} className="border">
+                Imie i nazwisko
+              </Col>
+              <Col md={4} className="border">
+                Oceny cząstkowe
+              </Col>
+              <Col md={1} className="border">
+                Średnia
+              </Col>
+              <Col md={2} className="border">
+                Ocena Proponowana
+              </Col>
+              <Col md={2} className="border">
+                Ocena Końcowa
+              </Col>
+            </Row>
+            {students.map((std, idx) => (
+              <Row
+                md={12}
+                onClick={() => handleSetStudent(std)}
+                style={{ cursor: "pointer" }}
+                className={
+                  student?.student_id === std.student_id &&
+                  gradeCategory !== "Końcowa" &&
+                  gradeCategory !== "Propozycja"
+                    ? "activeStudent"
+                    : ""
+                }
+              >
+                <Col md={1} className="border">
+                  {++idx}
+                </Col>
+
+                <Col
+                  md={2}
+                  className="border"
+                  onClick={() => handleSetStudent(std)}
+                >
+                  {std.name} {std.second_name}
+                </Col>
+                <Col md={4} className="border">
+                  <div className="grades">
+                    {grades.map((grd) =>
+                      grd.student_id === std.student_id &&
+                      grd.category !== "Propozycja" &&
+                      grd.category !== "Końcowa" ? (
+                        <div
+                          key={grd.grade_id}
+                          onClick={(e) => handleSetGrade(e, grd)}
+                          className={
+                            grd.grade_id === grade?.grade_id
+                              ? `activeGrade ${grd.category}`
+                              : grd.category
+                          }
+                        >
+                          {grd.text}
+                        </div>
+                      ) : null
+                    )}
+                  </div>
+                </Col>
+                <Col md={1} className="border">
+                  <div className="average">
+                    {calculateAvg(grades, std)
+                      ? calculateAvg(grades, std)
+                      : "-"}
+                  </div>
+                </Col>
+                <Col
+                  md={2}
+                  onClick={(e) => handleSetStudentProposedGrade(e, std)}
                   className={
-                    student?.student_id === std.student_id
-                      ? "activeStudent"
-                      : ""
+                    student?.student_id === std.student_id &&
+                    gradeCategory !== "Końcowa" &&
+                    gradeCategory === "Propozycja"
+                      ? "activeStudent border"
+                      : "border"
                   }
                 >
-                  <td
-                    key={idx}
-                    onClick={() => handleSetStudent(std)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    {idx}
-                  </td>
-
-                  <td>
-                    {std.name} {std.second_name}
-                  </td>
-                  <td>
-                    <div className="grades">
-                      {grades.map((grd) =>
-                        grd.student_id === std.student_id &&
-                        grd.category !== "Propozycja" &&
-                        grd.category !== "Końcowa" ? (
-                          <div
-                            key={grd.grade_id}
-                            onClick={() => handleSetGrade(grd)}
-                            style={{ cursor: "pointer" }}
-                            className={
-                              grd.grade_id === grade?.grade_id
-                                ? `activeGrade ${grd.category}`
-                                : grd.category
-                            }
-                          >
-                            {grd.text}
-                          </div>
-                        ) : null
-                      )}
-                    </div>
-                  </td>
-                  <td>
-                    <div className="proposed-grade">
-                      {grades.map((grd) =>
-                        grd.student_id === std.student_id &&
-                        grd.category === "Propozycja" ? (
-                          <div
-                            key={grd.grade_id}
-                            onClick={() => handleSetGrade(grd)}
-                            style={{ cursor: "pointer" }}
-                            className={
-                              grd.grade_id === grade.grade_id
-                                ? `activeGrade ${grd.category}`
-                                : grd.category
-                            }
-                          >
-                            {grd.text}
-                          </div>
-                        ) : null
-                      )}
-                    </div>
-                  </td>
-                  <td>
-                    <div className="final-grade">
-                      {grades.map((grd) =>
-                        grd.student_id === std.student_id &&
-                        grd.category === "Końcowa" ? (
-                          <div
-                            key={grd.grade_id}
-                            onClick={() => handleSetGrade(grd)}
-                            style={{ cursor: "pointer" }}
-                            className={
-                              grd.grade_id === grade.grade_id
-                                ? `activeGrade ${grd.category}`
-                                : grd.category
-                            }
-                          >
-                            {grd.text}
-                          </div>
-                        ) : null
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+                  <div className="proposed-grade">
+                    {grades.map((grd) =>
+                      grd.student_id === std.student_id &&
+                      grd.category === "Propozycja" ? (
+                        <div
+                          key={grd.grade_id}
+                          onClick={(e) => handleSetGrade(e, grd)}
+                          className={
+                            grd.grade_id === grade?.grade_id
+                              ? `activeGrade ${grd.category}`
+                              : grd.category
+                          }
+                        >
+                          {grd.text}
+                        </div>
+                      ) : null
+                    )}
+                  </div>
+                </Col>
+                <Col
+                  md={2}
+                  onClick={(e) => handleSetStudentFinalGrade(e, std)}
+                  className={
+                    student?.student_id === std.student_id &&
+                    gradeCategory === "Końcowa" &&
+                    gradeCategory !== "Propozycja"
+                      ? "activeStudent border"
+                      : "border"
+                  }
+                >
+                  <div className="final-grade">
+                    {grades.map((grd) =>
+                      grd.student_id === std.student_id &&
+                      grd.category === "Końcowa" ? (
+                        <div
+                          key={grd.grade_id}
+                          onClick={(e) => handleSetGrade(e, grd)}
+                          className={
+                            grd.grade_id === grade?.grade_id
+                              ? `activeGrade ${grd.category}`
+                              : grd.category
+                          }
+                        >
+                          {grd.text}
+                        </div>
+                      ) : null
+                    )}
+                  </div>
+                </Col>
+              </Row>
+            ))}
+          </>
         ) : (
           <p>Brak uczniów</p>
         )}

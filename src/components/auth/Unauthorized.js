@@ -1,3 +1,4 @@
+import { Button, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const Unauthorized = () => {
@@ -6,14 +7,20 @@ const Unauthorized = () => {
   const goBack = () => navigate(-1);
 
   return (
-    <section>
-      <h1>Unauthorized</h1>
-      <br />
-      <p>You do not have access to the requested page.</p>
-      <div className="flexGrow">
-        <button onClick={goBack}>Go Back</button>
-      </div>
-    </section>
+    <Container className="Unauthorized">
+      <Row className="justify-content-center mt-5">
+        <h1>401</h1>
+      </Row>
+      <Row className="justify-content-center">
+        <h2>Brak autoryzacji.</h2>
+      </Row>
+      <Row className="justify-content-center">
+        <h3>
+          Nie masz uprawnień do przeglądania tej strony. <br />
+          <Button onClick={goBack}>Wróć</Button>
+        </h3>
+      </Row>
+    </Container>
   );
 };
 

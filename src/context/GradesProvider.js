@@ -4,21 +4,23 @@ const GradesContext = createContext({});
 
 export const GradesProvider = ({ children }) => {
   const [student, setStudent] = useState(null);
-  const [grade, setGrade] = useState(null);
+  const [grade, setGrade] = useState(0);
   const [grades, setGrades] = useState([]);
   const [students, setStudents] = useState([]);
   const [classes, setClasses] = useState([]);
-  const [selectedClass, setSelectedClass] = useState(null);
-  const [weight, setWeight] = useState(Number);
+  const [selectedClass, setSelectedClass] = useState("");
+  const [gradeWeight, setGradeWeight] = useState(1);
   const [category, setCategory] = useState("");
   const [subject, setSubject] = useState("");
-  const [gradeValue, setGradeValue] = useState(Number);
-  const [gradeId, setGradeId] = useState(Number);
-  const [studentId, setStudentId] = useState(Number);
-  const [classId, setClassId] = useState(Number);
+  const [gradeValue, setGradeValue] = useState(0);
+  const [gradeId, setGradeId] = useState(0);
+  const [studentId, setStudentId] = useState(0);
+  const [classId, setClassId] = useState(0);
   const [studentName, setStudentName] = useState("");
   const [studentSecondName, setStudentSecondName] = useState("");
   const [className, setClassName] = useState("");
+  const [gradeCategory, setGradeCategory] = useState("");
+  const [gradeComment, setGradeComment] = useState("");
 
   return (
     <GradesContext.Provider
@@ -35,8 +37,8 @@ export const GradesProvider = ({ children }) => {
         setClasses,
         selectedClass,
         setSelectedClass,
-        weight,
-        setWeight,
+        gradeWeight,
+        setGradeWeight,
         category,
         setCategory,
         subject,
@@ -55,6 +57,10 @@ export const GradesProvider = ({ children }) => {
         setStudentSecondName,
         className,
         setClassName,
+        gradeCategory,
+        setGradeCategory,
+        gradeComment,
+        setGradeComment,
       }}
     >
       {children}

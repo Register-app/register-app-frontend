@@ -47,10 +47,10 @@ const GradesButtons = () => {
     setClasses,
     selectedClass,
     setSelectedClass,
-    weight,
-    setWeight,
-    category,
-    setCategory,
+    gradeWeight,
+    setGradeWeight,
+    gradeCategory,
+    setGradeCategory,
     subject,
     setSubject,
     gradeValue,
@@ -67,6 +67,8 @@ const GradesButtons = () => {
     setStudentSecondName,
     className,
     setClassName,
+    gradeComment,
+    setGradeComment,
   } = useGrades();
 
   const [tempId, setTempId] = useState(100);
@@ -86,7 +88,10 @@ const GradesButtons = () => {
           return {
             ...g,
             text: grd.text,
-            category: category,
+            category: gradeCategory,
+            value: grd.value,
+            weight: gradeWeight,
+            comment: gradeComment,
           };
         }
         return g;
@@ -96,46 +101,82 @@ const GradesButtons = () => {
       const newGrade = {
         student_id: student.student_id,
         grade_id: tempId,
-        subject: "Przyroda",
-        category: category,
+        category: gradeCategory,
         text: grd.text,
+        value: grd.value,
+        weight: gradeWeight,
+        comment: gradeComment,
       };
       setGrades((prevArray) => [...prevArray, newGrade]);
       setTempId(tempId + 1);
+      setStudent(students[students.indexOf(student) + 1]);
     }
   };
 
-  const handleChangeCategory = (event) => {
-    setCategory(event.target.value);
-    console.log(event.target.value);
+  const handleDeleteGrade = (grd) => {
+    const newGrades = grades.filter((g) => g.grade_id !== grd.grade_id);
+    setGrades(newGrades);
+    setGrade(null);
   };
 
   return (
     <>
-      <Container className="GradesButtons">
+      <Container className="GradesButtons border">
         <Row className="mb-2 justify-content-center">
-          Wybierz klasę:
-          <ClassSelect classes={classes} setSelectedClass={setSelectedClass} />
+          <Col>
+            Klasa:
+            <ClassSelect
+              classes={classes}
+              setSelectedClass={setSelectedClass}
+            />
+          </Col>
+          <Col>
+            Kategoria:
+            <FormSelect
+              className={gradeCategory}
+              value={gradeCategory}
+              onChange={(e) => setGradeCategory(e.target.value)}
+            >
+              <option value="">Wybierz kategorię</option>
+              <option className="Sprawdzian" value="Sprawdzian">
+                Sprawdzian
+              </option>
+              <option className="Kartkówka" value="Kartkówka">
+                Kartkówka
+              </option>
+              <option className="Aktywność" value="Aktywność">
+                Aktywność
+              </option>
+            </FormSelect>
+          </Col>
         </Row>
         <Row className="mb-2 justify-content-center">
-          Wybierz kategorię:
-          <FormSelect onChange={(e) => handleChangeCategory(e)}>
-            <option value="">Wybierz kategorię</option>
-            <option value="Sprawdzian">Sprawdzian</option>
-            <option value="Kartkówka">Kartkówka</option>
-            <option value="Aktywność">Aktywność</option>
-            <option value="Propozycja">Propozycja</option>
-            <option value="Końcowa">Końcowa</option>
-          </FormSelect>
+          <Col>
+            Waga:
+            <FormControl
+              type="number"
+              value={gradeWeight}
+              defaultValue={1}
+              onChange={(e) => setGradeWeight(parseInt(e.target.value))}
+            />
+          </Col>
+          <Col>
+            Komentarz:
+            <FormControl
+              type="text"
+              value={gradeComment}
+              onChange={(e) => setGradeComment(e.target.value)}
+            />
+          </Col>
         </Row>
         <Row className="d-flex justify-content-center" fluid>
           <div className="btn-container">
             {gradeValues.map((grd) => (
               <Button
                 variant="outline-dark"
-                className="btn border"
+                className="border btn-custom"
                 disabled={
-                  (category == "" || !selectedClass || !student) && !grade
+                  (gradeCategory == "" || !selectedClass || !student) && !grade
                 }
                 onClick={() => handleAddGrade(grd)}
               >
@@ -143,6 +184,17 @@ const GradesButtons = () => {
               </Button>
             ))}
           </div>
+        </Row>
+
+        <Row className="d-flex justify-content-center mt-2" fluid>
+          <Button
+            variant="outline-dark"
+            className="btn border"
+            disabled={!grade}
+            onClick={() => handleDeleteGrade(grade)}
+          >
+            Usuń ocenę
+          </Button>
         </Row>
       </Container>
     </>

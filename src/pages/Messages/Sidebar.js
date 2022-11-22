@@ -49,7 +49,6 @@ const Sidebar = () => {
     return () => {
       disconnect();
     };
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userMsg]);
 
@@ -91,7 +90,6 @@ const Sidebar = () => {
     if (message.sender_id === userMsg.user_id) {
       setMessages((messages) => [...messages, message]);
     }
-    //getMessages(userMsg);
   };
 
   const getMessages = async (usr) => {

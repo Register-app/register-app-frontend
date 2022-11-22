@@ -6,16 +6,16 @@ import NotFound from "components/auth/NotFound";
 import RequireAuth from "components/auth/RequireAuth";
 import Unauthorized from "components/auth/Unauthorized";
 import Footer from "components/footer";
-import Login from "components/form/Login";
 import Header from "components/header";
 import Layout from "components/layout";
-import { MessagesProvider } from "context/MessagesProvider";
 import Navigation from "components/navigation";
 import { GradesProvider } from "context/GradesProvider";
+import { MessagesProvider } from "context/MessagesProvider";
 import Attendances from "pages/Attendances";
 import AddFrequency from "pages/Attendances/AddFrequency";
 import Grades from "pages/Grades";
 import AddGrade from "pages/Grades/AddGrade";
+import Login from "pages/Login";
 import Messages from "pages/Messages";
 import Schedule from "pages/Schedule";
 import Summary from "pages/Summary";
@@ -33,7 +33,7 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route path="login" element={<Login />} />
           <Route path="unauthorized" element={<Unauthorized />} />
-          <Route element={<RequireAuth allowedRoles={["USER"]} />}>
+          <Route element={<RequireAuth allowedRoles={["ROLE_USER"]} />}>
             <Route path="/" element={<Summary />} />
             <Route path="lesson-plan" element={<Schedule />} />
             <Route

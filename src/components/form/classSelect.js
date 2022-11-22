@@ -4,7 +4,6 @@ import { FormSelect } from "react-bootstrap";
 const ClassSelect = ({ classes, setSelectedClass }) => {
   const handleChangeClass = (event) => {
     setSelectedClass(event.target.value);
-    console.log(event.target.value);
   };
 
   return (

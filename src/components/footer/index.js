@@ -43,7 +43,7 @@ const Footer = () => {
               </Row>
             </small>
           </Col>
-          <p class="copyright">e-Dziennik © 2022</p>
+          <p className="copyright">e-Dziennik © 2022</p>
         </Row>
       </Container>
     </footer>

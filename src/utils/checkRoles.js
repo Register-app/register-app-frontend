@@ -1,5 +1,9 @@
+import jwtDecode from "jwt-decode";
+
 export const checkRoles = (user, { allowedRoles }) => {
-  return user?.roles?.find((role) => allowedRoles?.includes(role.name))
-    ? true
-    : false;
+  const decoded = user?.jwtToken ? jwtDecode(user.jwtToken) : undefined;
+
+  const roles = decoded?.roles || [];
+
+  return roles.find((role) => allowedRoles?.includes(role)) ? true : false;
 };
