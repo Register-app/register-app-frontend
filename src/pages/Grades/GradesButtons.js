@@ -12,27 +12,6 @@ import ClassSelect from "components/form/ClassSelect";
 import { useEffect } from "react";
 import useGrades from "hooks/useGrades";
 
-const gradeValues = [
-  { value: 5.75, text: "6-" },
-  { value: 6, text: "6" },
-  { value: 0, text: "+" },
-  { value: 4.75, text: "5-" },
-  { value: 5, text: "5" },
-  { value: 5.5, text: "5+" },
-  { value: 3.75, text: "4-" },
-  { value: 4, text: "4" },
-  { value: 4.5, text: "4+" },
-  { value: 2.75, text: "3-" },
-  { value: 3, text: "3" },
-  { value: 3.5, text: "3+" },
-  { value: 1.75, text: "2-" },
-  { value: 2, text: "2" },
-  { value: 2.5, text: "2+" },
-  { value: 0, text: "-" },
-  { value: 1, text: "1" },
-  { value: 1.5, text: "1+" },
-];
-
 const GradesButtons = () => {
   const {
     student,
@@ -51,22 +30,8 @@ const GradesButtons = () => {
     setGradeWeight,
     gradeCategory,
     setGradeCategory,
-    subject,
-    setSubject,
-    gradeValue,
-    setGradeValue,
-    gradeId,
-    setGradeId,
-    studentId,
-    setStudentId,
-    classId,
-    setClassId,
-    studentName,
-    setStudentName,
-    studentSecondName,
-    setStudentSecondName,
-    className,
-    setClassName,
+    gradeValues,
+    setGradeValues,
     gradeComment,
     setGradeComment,
   } = useGrades();
@@ -78,6 +43,27 @@ const GradesButtons = () => {
       { class_id: "1", name: "VII A" },
       { class_id: "2", name: "VI B" },
       { class_id: "3", name: "IV C" },
+    ]);
+
+    setGradeValues([
+      { value: 5.75, text: "6-" },
+      { value: 6, text: "6" },
+      { value: 0, text: "+" },
+      { value: 4.75, text: "5-" },
+      { value: 5, text: "5" },
+      { value: 5.5, text: "5+" },
+      { value: 3.75, text: "4-" },
+      { value: 4, text: "4" },
+      { value: 4.5, text: "4+" },
+      { value: 2.75, text: "3-" },
+      { value: 3, text: "3" },
+      { value: 3.5, text: "3+" },
+      { value: 1.75, text: "2-" },
+      { value: 2, text: "2" },
+      { value: 2.5, text: "2+" },
+      { value: 0, text: "-" },
+      { value: 1, text: "1" },
+      { value: 1.5, text: "1+" },
     ]);
   }, []);
 
@@ -156,7 +142,6 @@ const GradesButtons = () => {
             <FormControl
               type="number"
               value={gradeWeight}
-              defaultValue={1}
               onChange={(e) => setGradeWeight(parseInt(e.target.value))}
             />
           </Col>
@@ -169,10 +154,11 @@ const GradesButtons = () => {
             />
           </Col>
         </Row>
-        <Row className="d-flex justify-content-center" fluid>
+        <Row className="d-flex justify-content-center">
           <div className="btn-container">
-            {gradeValues.map((grd) => (
+            {gradeValues.map((grd, idx) => (
               <Button
+                key={idx}
                 variant="outline-dark"
                 className="border btn-custom"
                 disabled={
@@ -186,7 +172,7 @@ const GradesButtons = () => {
           </div>
         </Row>
 
-        <Row className="d-flex justify-content-center mt-2" fluid>
+        <Row className="d-flex justify-content-center mt-2">
           <Button
             variant="outline-dark"
             className="btn border"

@@ -11,7 +11,9 @@ const ClassSelect = ({ classes, setSelectedClass }) => {
       <FormSelect onChange={(e) => handleChangeClass(e)}>
         <option value="">Wybierz klasę</option>
         {classes.map((cls) => (
-          <option value={cls.class_id}>{cls.name}</option>
+          <option key={cls.class_id} value={cls.class_id}>
+            {cls.name}
+          </option>
         ))}
       </FormSelect>
     </>

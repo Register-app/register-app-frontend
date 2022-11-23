@@ -26,3 +26,22 @@
     bottom: 0;
     left: 12px;
 }
+
+.list-group {
+    height: 48vh;
+    border: 1px solid lightgray;
+    overflow-y: scroll;
+}
+
+.list-group-item {
+    border-left: none;
+    border-right: none;
+}
+
+.list-group-item:first-child {
+    border-top: none;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}

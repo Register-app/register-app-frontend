@@ -1,4 +1,5 @@
 import logo from "assets/logo.PNG";
+import useAuth from "hooks/useAuth";
 import useLogout from "hooks/useLogout";
 import {
   Button,
@@ -12,6 +13,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const { user } = useAuth();
   const logout = useLogout();
   const navigate = useNavigate();
   const location = useLocation();
@@ -33,24 +35,30 @@ const Header = () => {
             </LinkContainer>
           </Col>
           <Col className="d-flex align-items-center px-5">
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse
-              id="basic-navbar-nav"
-              className="d-flex justify-content-end"
-            >
-              <NavDropdown title="Witaj, imie i nazwisko">
-                <LinkContainer to="/">
-                  <NavDropdown.Item>Nowa wiadomość</NavDropdown.Item>
-                </LinkContainer>
-                <LinkContainer to="/home">
-                  <NavDropdown.Item>Ustawienia</NavDropdown.Item>
-                </LinkContainer>
-                <NavDropdown.Divider />
-                <NavDropdown.Item>
-                  <Button onClick={handleLogout}>Wyloguj</Button>
-                </NavDropdown.Item>
-              </NavDropdown>
-            </Navbar.Collapse>
+            {user && (
+              <>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse
+                  id="basic-navbar-nav"
+                  className="d-flex justify-content-end"
+                >
+                  <NavDropdown
+                    title={`Witaj, ${user.name} ${user.second_name}`}
+                  >
+                    <LinkContainer to="/">
+                      <NavDropdown.Item>Nowa wiadomość</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to="/home">
+                      <NavDropdown.Item>Ustawienia</NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item>
+                      <Button onClick={handleLogout}>Wyloguj</Button>
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </Navbar.Collapse>
+              </>
+            )}
           </Col>
         </Navbar>
       </Row>

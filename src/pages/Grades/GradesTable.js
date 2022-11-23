@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { startTransition, useEffect, useRef } from "react";
 import "pages/Grades/GradesTable.css";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import useGrades from "hooks/useGrades";
+import useAxios from "hooks/useAxios";
 
 const GradesTable = () => {
   const {
@@ -41,25 +42,28 @@ const GradesTable = () => {
     setClassName,
   } = useGrades();
 
-  useEffect(() => {
-    setStudents([
-      {
-        student_id: 1,
-        name: "Jan",
-        second_name: "Kowal",
-      },
-      {
-        student_id: 2,
-        name: "Janina",
-        second_name: "Bareja",
-      },
-      {
-        student_id: 3,
-        name: "Karolina",
-        second_name: "Turban",
-      },
-    ]);
+  const axios = useAxios();
 
+  useEffect(() => {
+    const getStudents = async () => {
+      try {
+        const response = await axios.get("/v1/students/class/1");
+        setStudents(response.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getStudents();
+  }, []);
+
+  useEffect(() => {
+    const element = document.getElementById(`student-${student?.student_id}`);
+    if (element) {
+      element.scrollIntoView({ block: "center", behavior: "smooth" });
+    }
+  }, [student]);
+
+  useEffect(() => {
     setGrades([
       {
         student_id: 1,
@@ -197,14 +201,16 @@ const GradesTable = () => {
                 Średnia
               </Col>
               <Col md={2} className="border">
-                Ocena Proponowana
+                Ocena proponowana
               </Col>
               <Col md={2} className="border">
-                Ocena Końcowa
+                Ocena końcowa
               </Col>
             </Row>
             {students.map((std, idx) => (
               <Row
+                id={`student-${std.student_id}`}
+                key={idx}
                 md={12}
                 onClick={() => handleSetStudent(std)}
                 style={{ cursor: "pointer" }}
@@ -250,9 +256,9 @@ const GradesTable = () => {
                 </Col>
                 <Col md={1} className="border">
                   <div className="average">
-                    {calculateAvg(grades, std)
+                    {calculateAvg(grades, std) !== "NaN"
                       ? calculateAvg(grades, std)
-                      : "-"}
+                      : "0.00"}
                   </div>
                 </Col>
                 <Col

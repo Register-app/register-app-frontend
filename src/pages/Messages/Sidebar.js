@@ -1,9 +1,10 @@
+import SearchBar from "components/form/SearchBar";
 import useAuth from "hooks/useAuth";
 import useAxios from "hooks/useAxios";
 import useMessages from "hooks/useMessages";
 import "pages/Messages/Sidebar.css";
-import { useEffect } from "react";
-import { Col, ListGroup, Row } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Col, FormControl, ListGroup, Row } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import SockJS from "sockjs-client";
 import { over } from "stompjs";
@@ -29,19 +30,23 @@ const Sidebar = () => {
   const axios = useAxios();
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchedUsers, setSearchedUsers] = useState([]);
 
   useEffect(() => {
     const getUsers = async () => {
       try {
         const response = await axios.get(GET_USERS_URL);
         setUsers(response.data);
+        setSearchedUsers(response.data);
       } catch (err) {
         console.error(err);
         navigate("/login", { state: { from: location }, replace: true });
       }
     };
     getUsers();
+  }, []);
 
+  useEffect(() => {
     if (userMsg) {
       connect();
     }
@@ -108,29 +113,36 @@ const Sidebar = () => {
     <>
       <h2 className="text-center">Użytkownicy</h2>
       {users?.length ? (
-        <ListGroup>
-          {users.map((usr) => (
-            <ListGroup.Item
-              key={usr.user_id}
-              style={{ cursor: "pointer" }}
-              active={userMsg?.user_id === usr?.user_id}
-              onClick={() => handleUserMsg(usr)}
-              disabled={usr.user_id === user.user_id}
-            >
-              <Row>
-                <Col xs={2} className="member-status">
-                  <i className="fas fa-2x fa-message member-status-img"></i>
-                </Col>
-                <Col xs={9}>
-                  {usr.name} {usr.second_name}
-                  {usr.user_id === user?.user_id && " (Ty)"}
-                </Col>
-              </Row>
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
+        <>
+          <SearchBar
+            data={users}
+            setSearchedData={setSearchedUsers}
+            dataToSearch="second_name"
+          />
+          <ListGroup>
+            {searchedUsers.map((usr) => (
+              <ListGroup.Item
+                key={usr.user_id}
+                style={{ cursor: "pointer" }}
+                active={userMsg?.user_id === usr?.user_id}
+                onClick={() => handleUserMsg(usr)}
+                disabled={usr.user_id === user.user_id}
+              >
+                <Row>
+                  <Col xs={2} className="member-status">
+                    <i className="fas fa-2x fa-message member-status-img"></i>
+                  </Col>
+                  <Col xs={9}>
+                    {usr.name} {usr.second_name}
+                    {usr.user_id === user?.user_id && " (Ty)"}
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </>
       ) : (
-        <p>No users to display</p>
+        <p>Brak użytkowników do wyświetlenia.</p>
       )}
     </>
   );

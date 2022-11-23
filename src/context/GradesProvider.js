@@ -12,7 +12,7 @@ export const GradesProvider = ({ children }) => {
   const [gradeWeight, setGradeWeight] = useState(1);
   const [category, setCategory] = useState("");
   const [subject, setSubject] = useState("");
-  const [gradeValue, setGradeValue] = useState(0);
+  const [gradeValues, setGradeValues] = useState([]);
   const [gradeId, setGradeId] = useState(0);
   const [studentId, setStudentId] = useState(0);
   const [classId, setClassId] = useState(0);
@@ -43,8 +43,8 @@ export const GradesProvider = ({ children }) => {
         setCategory,
         subject,
         setSubject,
-        gradeValue,
-        setGradeValue,
+        gradeValues,
+        setGradeValues,
         gradeId,
         setGradeId,
         studentId,

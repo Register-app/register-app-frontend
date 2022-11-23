@@ -60,3 +60,18 @@
     box-shadow: 0 0 5px rgb(0, 0, 0);
     transition: border 50ms ease-in-out;
 }
+
+.GradesTable .row {
+    min-height: 50px;
+}
+
+.GradesTable {
+    height: 58vh;
+    overflow-y: scroll;
+}
+
+.GradesTable .row:first-child {
+    background: white;
+    position: sticky;
+    top: 0;
+}

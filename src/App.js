@@ -21,6 +21,7 @@ import Schedule from "pages/Schedule";
 import Summary from "pages/Summary";
 import Timetable from "pages/Timetable";
 import useAuth from "./hooks/useAuth";
+import { checkRoles } from "utils/checkRoles";
 
 const App = () => {
   const { user } = useAuth();
@@ -28,12 +29,14 @@ const App = () => {
   return (
     <div className="App">
       <Header />
-      {user && <Navigation />}
+      {checkRoles(user, ["ROLE_USER"]) && <Navigation />}
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="login" element={<Login />} />
           <Route path="unauthorized" element={<Unauthorized />} />
-          <Route element={<RequireAuth allowedRoles={["ROLE_USER"]} />}>
+          <Route
+            element={<RequireAuth user={user} allowedRoles={["ROLE_USER"]} />}
+          >
             <Route path="/" element={<Summary />} />
             <Route path="lesson-plan" element={<Schedule />} />
             <Route
