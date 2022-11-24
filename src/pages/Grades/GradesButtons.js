@@ -11,6 +11,8 @@ import "pages/Grades/GradesButtons.css";
 import ClassSelect from "components/form/ClassSelect";
 import { useEffect } from "react";
 import useGrades from "hooks/useGrades";
+import axios from "lib/axios";
+import useAuth from "hooks/useAuth";
 
 const GradesButtons = () => {
   const {
@@ -39,11 +41,11 @@ const GradesButtons = () => {
   const [tempId, setTempId] = useState(100);
 
   useEffect(() => {
-    setClasses([
-      { class_id: "1", name: "VII A" },
-      { class_id: "2", name: "VI B" },
-      { class_id: "3", name: "IV C" },
-    ]);
+    // setClasses([
+    //   { class_id: "1", name: "VII A" },
+    //   { class_id: "2", name: "VI B" },
+    //   { class_id: "3", name: "IV C" },
+    // ]);
 
     setGradeValues([
       { value: 5.75, text: "6-" },

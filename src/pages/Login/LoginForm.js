@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const LOGIN_URL = "/auth/login";
+const LOGIN_URL = "/api/auth/login";
 
 const LoginForm = () => {
   const { setUser } = useAuth();

@@ -4,14 +4,13 @@ import useAxios from "hooks/useAxios";
 import useMessages from "hooks/useMessages";
 import "pages/Messages/Sidebar.css";
 import { useEffect, useState } from "react";
-import { Col, FormControl, ListGroup, Row } from "react-bootstrap";
+import { Col, ListGroup, Row } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import SockJS from "sockjs-client";
 import { over } from "stompjs";
 
 const WEBSOCKET_URL = "http://localhost:8080/ws";
-const GET_USERS_URL = "/v1/users";
-const GET_MESSAGES_URL = "/v1/messages/listmessage";
+const GET_USERS_URL = "/api/v1/users";
 
 const Sidebar = () => {
   const { user } = useAuth();
@@ -54,7 +53,6 @@ const Sidebar = () => {
     return () => {
       disconnect();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userMsg]);
 
   const disconnect = () => {
@@ -99,10 +97,9 @@ const Sidebar = () => {
 
   const getMessages = async (usr) => {
     try {
-      const response = await axios.post(GET_MESSAGES_URL, {
-        sender_id: user.user_id,
-        receiver_id: usr.user_id,
-      });
+      const response = await axios.get(
+        `/api/v1/messages/sender/${user.user_id}/receiver/${usr.user_id}`
+      );
       setMessages(response?.data);
     } catch (error) {
       console.error("Błąd ładowania wiadomości!", error);

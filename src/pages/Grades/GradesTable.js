@@ -3,6 +3,7 @@ import "pages/Grades/GradesTable.css";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import useGrades from "hooks/useGrades";
 import useAxios from "hooks/useAxios";
+import useAuth from "hooks/useAuth";
 
 const GradesTable = () => {
   const {
@@ -43,18 +44,47 @@ const GradesTable = () => {
   } = useGrades();
 
   const axios = useAxios();
+  const { user } = useAuth();
 
   useEffect(() => {
-    const getStudents = async () => {
-      try {
-        const response = await axios.get("/v1/students/class/1");
-        setStudents(response.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    getStudents();
+    if (!user.teacher_id) {
+      getTeacher();
+    }
   }, []);
+
+  const getTeacher = async () => {
+    try {
+      const response = await axios.get(`/api/v1/teachers/user/${user.user_id}`);
+      const teacher = response?.data;
+      const merged = { ...user, ...teacher };
+      console.log("merged", merged);
+      localStorage.setItem("user", JSON.stringify(merged));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getStudents = async () => {
+    try {
+      const response = await axios.get(
+        `/api/v1/students/class/${selectedClass.class_id}`
+      );
+      setStudents(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getGrades = async () => {
+    try {
+      const response = await axios.get(
+        `/api/v1/students/class/${selectedClass.class_id}`
+      );
+      setStudents(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     const element = document.getElementById(`student-${student?.student_id}`);
