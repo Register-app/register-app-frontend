@@ -1,0 +1,19 @@
+.TopBar .test {
+    background-color: red;
+}
+
+.TopBar .quiz {
+    background-color: green;
+}
+
+.TopBar .activity {
+    background-color: orange;
+}
+
+.TopBar .proposed {
+    background-color: rgb(131, 177, 236);
+}
+
+.TopBar .final {
+    background-color: rgb(106, 110, 143);
+}

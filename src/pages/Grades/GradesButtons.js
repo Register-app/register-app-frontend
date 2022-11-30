@@ -1,18 +1,8 @@
 import { useState } from "react";
-import {
-  Button,
-  Col,
-  Container,
-  FormControl,
-  FormSelect,
-  Row,
-} from "react-bootstrap";
+import { Button, Container, Row } from "react-bootstrap";
 import "pages/Grades/GradesButtons.css";
-import ClassSelect from "components/form/ClassSelect";
 import { useEffect } from "react";
 import useGrades from "hooks/useGrades";
-import axios from "lib/axios";
-import useAuth from "hooks/useAuth";
 
 const GradesButtons = () => {
   const {
@@ -23,30 +13,17 @@ const GradesButtons = () => {
     grades,
     setGrades,
     students,
-    setStudents,
-    classes,
-    setClasses,
     selectedClass,
-    setSelectedClass,
     gradeWeight,
-    setGradeWeight,
-    gradeCategory,
-    setGradeCategory,
+    gradeType,
     gradeValues,
     setGradeValues,
     gradeComment,
-    setGradeComment,
   } = useGrades();
 
   const [tempId, setTempId] = useState(100);
 
   useEffect(() => {
-    // setClasses([
-    //   { class_id: "1", name: "VII A" },
-    //   { class_id: "2", name: "VI B" },
-    //   { class_id: "3", name: "IV C" },
-    // ]);
-
     setGradeValues([
       { value: 5.75, text: "6-" },
       { value: 6, text: "6" },
@@ -76,7 +53,7 @@ const GradesButtons = () => {
           return {
             ...g,
             text: grd.text,
-            category: gradeCategory,
+            type: gradeType.value,
             value: grd.value,
             weight: gradeWeight,
             comment: gradeComment,
@@ -89,7 +66,7 @@ const GradesButtons = () => {
       const newGrade = {
         student_id: student.student_id,
         grade_id: tempId,
-        category: gradeCategory,
+        type: gradeType.value,
         text: grd.text,
         value: grd.value,
         weight: gradeWeight,
@@ -109,53 +86,7 @@ const GradesButtons = () => {
 
   return (
     <>
-      <Container className="GradesButtons border">
-        <Row className="mb-2 justify-content-center">
-          <Col>
-            Klasa:
-            <ClassSelect
-              classes={classes}
-              setSelectedClass={setSelectedClass}
-            />
-          </Col>
-          <Col>
-            Kategoria:
-            <FormSelect
-              className={gradeCategory}
-              value={gradeCategory}
-              onChange={(e) => setGradeCategory(e.target.value)}
-            >
-              <option value="">Wybierz kategorię</option>
-              <option className="Sprawdzian" value="Sprawdzian">
-                Sprawdzian
-              </option>
-              <option className="Kartkówka" value="Kartkówka">
-                Kartkówka
-              </option>
-              <option className="Aktywność" value="Aktywność">
-                Aktywność
-              </option>
-            </FormSelect>
-          </Col>
-        </Row>
-        <Row className="mb-2 justify-content-center">
-          <Col>
-            Waga:
-            <FormControl
-              type="number"
-              value={gradeWeight}
-              onChange={(e) => setGradeWeight(parseInt(e.target.value))}
-            />
-          </Col>
-          <Col>
-            Komentarz:
-            <FormControl
-              type="text"
-              value={gradeComment}
-              onChange={(e) => setGradeComment(e.target.value)}
-            />
-          </Col>
-        </Row>
+      <Container className="GradesButtons">
         <Row className="d-flex justify-content-center">
           <div className="btn-container">
             {gradeValues.map((grd, idx) => (
@@ -163,9 +94,7 @@ const GradesButtons = () => {
                 key={idx}
                 variant="outline-dark"
                 className="border btn-custom"
-                disabled={
-                  (gradeCategory == "" || !selectedClass || !student) && !grade
-                }
+                disabled={(!gradeType || !selectedClass || !student) && !grade}
                 onClick={() => handleAddGrade(grd)}
               >
                 {grd.text}

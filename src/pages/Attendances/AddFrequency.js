@@ -1,4 +1,4 @@
-import ClassSelect from "components/form/ClassSelect";
+import SelectClass from "components/form/SelectClass";
 import DatePicker from "components/form/datePicker";
 import ValueSelect from "components/form/valueSelect";
 import "pages/Attendances/Attendances.css";
@@ -118,7 +118,7 @@ const AddFrequency = () => {
             <Row>
               <Col>
                 Wybierz klasę:
-                <ClassSelect
+                <SelectClass
                   id="klasa"
                   options={classes}
                   value={selected}

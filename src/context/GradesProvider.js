@@ -8,18 +8,18 @@ export const GradesProvider = ({ children }) => {
   const [grades, setGrades] = useState([]);
   const [students, setStudents] = useState([]);
   const [classes, setClasses] = useState([]);
-  const [selectedClass, setSelectedClass] = useState("");
+  const [selectedClass, setSelectedClass] = useState(null);
   const [gradeWeight, setGradeWeight] = useState(1);
   const [category, setCategory] = useState("");
-  const [subject, setSubject] = useState("");
+  const [subject, setSubject] = useState(null);
   const [gradeValues, setGradeValues] = useState([]);
-  const [gradeId, setGradeId] = useState(0);
+  const [subjects, setSubjects] = useState([]);
   const [studentId, setStudentId] = useState(0);
   const [classId, setClassId] = useState(0);
   const [studentName, setStudentName] = useState("");
   const [studentSecondName, setStudentSecondName] = useState("");
-  const [className, setClassName] = useState("");
-  const [gradeCategory, setGradeCategory] = useState("");
+  const [gradeTypes, setGradeTypes] = useState([]);
+  const [gradeType, setGradeType] = useState(null);
   const [gradeComment, setGradeComment] = useState("");
 
   return (
@@ -45,8 +45,8 @@ export const GradesProvider = ({ children }) => {
         setSubject,
         gradeValues,
         setGradeValues,
-        gradeId,
-        setGradeId,
+        subjects,
+        setSubjects,
         studentId,
         setStudentId,
         classId,
@@ -55,12 +55,12 @@ export const GradesProvider = ({ children }) => {
         setStudentName,
         studentSecondName,
         setStudentSecondName,
-        className,
-        setClassName,
-        gradeCategory,
-        setGradeCategory,
+        gradeType,
+        setGradeType,
         gradeComment,
         setGradeComment,
+        gradeTypes,
+        setGradeTypes,
       }}
     >
       {children}

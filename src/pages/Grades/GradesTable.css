@@ -19,11 +19,13 @@
     align-items: center;
 }
 
-.GradesTable .Sprawdzian,
-.GradesTable .Kartkówka,
-.GradesTable .Aktywność,
-.GradesTable .Propozycja,
-.GradesTable .Końcowa {
+.GradesTable .test,
+.GradesTable .quiz,
+.GradesTable .activity,
+.GradesTable .proposed,
+.GradesTable .answer,
+.GradesTable .other,
+.GradesTable .final {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,23 +37,23 @@
     margin: 4px;
 }
 
-.GradesTable .Sprawdzian {
+.GradesTable .test {
     background-color: red;
 }
 
-.GradesTable .Kartkówka {
+.GradesTable .quiz {
     background-color: green;
 }
 
-.GradesTable .Aktywność {
+.GradesTable .activity {
     background-color: orange;
 }
 
-.GradesTable .Propozycja {
+.GradesTable .proposed {
     background-color: rgb(131, 177, 236);
 }
 
-.GradesTable .Końcowa {
+.GradesTable .final {
     background-color: rgb(106, 110, 143);
 }
 
@@ -66,7 +68,7 @@
 }
 
 .GradesTable {
-    height: 58vh;
+    height: 43vh;
     overflow-y: scroll;
 }
 

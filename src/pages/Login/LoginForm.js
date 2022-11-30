@@ -1,8 +1,18 @@
 import useAuth from "hooks/useAuth";
 import myAxios from "lib/axios";
 import { useState, useEffect } from "react";
-import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
+import {
+  Alert,
+  Button,
+  Col,
+  Container,
+  Form,
+  FormControl,
+  FormGroup,
+  FormLabel,
+  Row,
+} from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const LOGIN_URL = "/api/auth/login";
 
@@ -10,8 +20,7 @@ const LoginForm = () => {
   const { setUser } = useAuth();
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const homePage = "/";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +39,7 @@ const LoginForm = () => {
       localStorage.setItem("user", JSON.stringify(response?.data));
       setEmail("");
       setPassword("");
-      navigate(from, { replace: true });
+      navigate(homePage, { replace: true });
     } catch (error) {
       if (!error?.response) {
         setErrMsg("Brak odpowiedzi ze strony serwera.");
@@ -52,26 +61,26 @@ const LoginForm = () => {
         <Form className="justify-content-center" onSubmit={handleSubmit}>
           {errMsg && <Alert variant="danger">{errMsg}</Alert>}
           <h1 className="h3 mb-3 fw-normal">Zaloguj się</h1>
-          <Form.Group className="mb-3 form-floating">
-            <Form.Control
+          <FormGroup className="mb-3 form-floating">
+            <FormControl
               type="email"
               placeholder="Email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <Form.Label>Adres Email</Form.Label>
-          </Form.Group>
-          <Form.Group className="mb-3 form-floating">
-            <Form.Control
+            <FormLabel>Adres Email</FormLabel>
+          </FormGroup>
+          <FormGroup className="mb-3 form-floating">
+            <FormControl
               type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <Form.Label>Hasło</Form.Label>
-          </Form.Group>
+            <FormLabel>Hasło</FormLabel>
+          </FormGroup>
           <Col className="form-floating"></Col>
           <Button variant="primary" type="submit" className="col-6">
             Zaloguj

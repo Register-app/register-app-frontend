@@ -1,4 +1,4 @@
-import ClassSelect from "components/form/ClassSelect";
+import SelectClass from "components/form/SelectClass";
 import DatePicker from "components/form/datePicker";
 import GradeValue from "components/form/gradeValue";
 import ValueSelect from "components/form/valueSelect";
@@ -232,7 +232,7 @@ const AddGrade = () => {
             <Row>
               <Col>
                 Wybierz klasę:
-                <ClassSelect
+                <SelectClass
                   id="klasa"
                   options={classes}
                   value={selected}

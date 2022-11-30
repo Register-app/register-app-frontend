@@ -13,14 +13,14 @@
     height: 50px;
 }
 
-.GradesButtons .Sprawdzian {
+.GradesButtons .test {
     background-color: red;
 }
 
-.GradesButtons .Kartkówka {
+.GradesButtons .quiz {
     background-color: green;
 }
 
-.GradesButtons .Aktywność {
+.GradesButtons .activity {
     background-color: orange;
 }
