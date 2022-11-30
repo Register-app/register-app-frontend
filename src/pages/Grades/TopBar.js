@@ -44,7 +44,6 @@ const TopBar = () => {
   useEffect(() => {
     getClasses();
     getGradeTypes();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -55,7 +54,6 @@ const TopBar = () => {
       setSubjects([]);
       setStudents([]);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedClass]);
 
   const getClasses = async () => {
@@ -100,16 +98,16 @@ const TopBar = () => {
     }
   };
 
-  const getGrades = async () => {
-    try {
-      const response = await axios.get(
-        `/api/v1/students/class/${selectedClass.class_id}`
-      );
-      setStudents(response.data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  // const getGrades = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `/api/v1/students/class/${selectedClass.class_id}`
+  //     );
+  //     setStudents(response.data);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   const handleSetGradeType = (e) => {
     if (e.target.value !== "-") {

@@ -14,7 +14,6 @@ import { MessagesProvider } from "context/MessagesProvider";
 import Attendances from "pages/Attendances";
 import AddFrequency from "pages/Attendances/AddFrequency";
 import Grades from "pages/Grades";
-import AddGrade from "pages/Grades/AddGrade";
 import Login from "pages/Login";
 import Messages from "pages/Messages";
 import Schedule from "pages/Schedule";
@@ -47,7 +46,6 @@ const App = () => {
                 </GradesProvider>
               }
             />
-            <Route path="addgrade" element={<AddGrade />} />
             <Route path="addfrequency" element={<AddFrequency />} />
             <Route path="timetable" element={<Timetable />} />
             <Route path="frequency" element={<Attendances />} />
