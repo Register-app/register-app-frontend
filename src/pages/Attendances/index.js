@@ -1,13 +1,13 @@
 import AttendancesButtons from "pages/Attendances/AttendancesButtons";
 import AttendancesTable from "pages/Attendances/AttendancesTable";
 import { Col, Container, Row } from "react-bootstrap";
-import TopBar from "./TopBar";
+import TopBar from "pages/Attendances/TopBar";
 
 const Attendances = () => {
   return (
     <Container className="Attendances justify-content-md-center">
       <Row className="mb-2">
-
+      <TopBar />
       </Row>
       <Row>
         <Col md={10}>

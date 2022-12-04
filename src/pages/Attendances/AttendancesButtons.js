@@ -27,8 +27,8 @@ const AttendancesButtons = () => {
       { value: 3, text: "ZW" },
       { value: 4, text: "SP" },
     ]);
-  }, [setAttendanceValues]);
-
+  }, []);
+  console.log(attendanceValues);
   const handleAddAttendance = (grd) => {
     if (attendance) {
       const newAttendances = attendances.map((g) => {
@@ -61,7 +61,7 @@ const AttendancesButtons = () => {
     setAttendances(newAttendances);
     setAttendance(null);
   };
-console.log(attendanceValues);
+
   return (
     <>
       <Container className="AttendancesButtons">

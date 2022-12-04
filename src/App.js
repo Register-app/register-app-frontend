@@ -10,6 +10,7 @@ import Header from "components/header";
 import Layout from "components/layout";
 import Navigation from "components/navigation";
 import { GradesProvider } from "context/GradesProvider";
+import { AttendancesProvider } from "context/AttendancesProvider";
 import { MessagesProvider } from "context/MessagesProvider";
 import Attendances from "pages/Attendances";
 import Grades from "pages/Grades";
@@ -45,7 +46,14 @@ const App = () => {
                 </GradesProvider>
               }
             />
-            <Route path="attendances" element={<Attendances />} />
+            <Route
+              path="attendances"
+              element={
+                <AttendancesProvider>
+                  <Attendances />
+                </AttendancesProvider>
+              }
+            />
             <Route path="timetable" element={<Timetable />} />
             <Route path="*" element={<NotFound />} />
             <Route
