@@ -1,0 +1,79 @@
+.AttendancesTable .activeStudent {
+    background-color: rgb(154, 173, 255);
+    box-shadow: 0 0 10px rgb(154, 173, 255);
+    transition: background-color 100ms linear;
+}
+
+.AttendancesTable .attendances,
+.AttendancesTable .proposed-attendance,
+.AttendancesTable .final-attendance {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.AttendancesTable .proposed-attendance,
+.AttendancesTable .final-attendance,
+.AttendancesTable .average {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.AttendancesTable .test,
+.AttendancesTable .quiz,
+.AttendancesTable .activity,
+.AttendancesTable .proposed,
+.AttendancesTable .answer,
+.AttendancesTable .other,
+.AttendancesTable .final {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid grey;
+    margin: 4px;
+}
+
+.AttendancesTable .test {
+    background-color: red;
+}
+
+.AttendancesTable .quiz {
+    background-color: green;
+}
+
+.AttendancesTable .activity {
+    background-color: orange;
+}
+
+.AttendancesTable .proposed {
+    background-color: rgb(131, 177, 236);
+}
+
+.AttendancesTable .final {
+    background-color: rgb(106, 110, 143);
+}
+
+.AttendancesTable .activeAttendance {
+    border: 3px solid rgb(0, 0, 0);
+    box-shadow: 0 0 5px rgb(0, 0, 0);
+    transition: border 50ms ease-in-out;
+}
+
+.AttendancesTable .row {
+    min-height: 50px;
+}
+
+.AttendancesTable {
+    height: 43vh;
+    overflow-y: scroll;
+}
+
+.AttendancesTable .row:first-child {
+    background: white;
+    position: sticky;
+    top: 0;
+}
