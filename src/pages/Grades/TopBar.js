@@ -36,25 +36,11 @@ const TopBar = () => {
     student,
     gradeTypes,
     setGradeTypes,
+    setGrades,
   } = useGrades();
 
   const { user } = useAuth();
   const axios = useAxios();
-
-  useEffect(() => {
-    getClasses();
-    getGradeTypes();
-  }, []);
-
-  useEffect(() => {
-    if (selectedClass) {
-      getSubjects();
-      getStudents();
-    } else {
-      setSubjects([]);
-      setStudents([]);
-    }
-  }, [selectedClass]);
 
   const getClasses = async () => {
     try {
@@ -75,6 +61,11 @@ const TopBar = () => {
       console.error(err);
     }
   };
+
+  useEffect(() => {
+    getClasses();
+    getGradeTypes();
+  }, []);
 
   const getSubjects = async () => {
     try {
@@ -98,16 +89,34 @@ const TopBar = () => {
     }
   };
 
-  // const getGrades = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `/api/v1/students/class/${selectedClass.class_id}`
-  //     );
-  //     setStudents(response.data);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
+  useEffect(() => {
+    if (selectedClass) {
+      getSubjects();
+      getStudents();
+    } else {
+      setSubjects([]);
+      setStudents([]);
+    }
+  }, [selectedClass]);
+
+  const getGrades = async () => {
+    try {
+      const response = await axios.get(
+        `/api/v1/grades/class/${selectedClass.class_id}/subject/${subject.subject_id}`
+      );
+      setGrades(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    if (subject) {
+      getGrades();
+    } else {
+      setGrades([]);
+    }
+  }, [subject]);
 
   const handleSetGradeType = (e) => {
     if (e.target.value !== "-") {

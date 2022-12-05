@@ -40,7 +40,7 @@ const GradesTable = () => {
     if (
       !grades.find(
         (grd) =>
-          grd.student_id === student.student_id && grd.type === "proposed"
+          grd.student_id === student.student_id && grd.type_value === "proposed"
       )
     ) {
       setStudent(student);
@@ -53,7 +53,8 @@ const GradesTable = () => {
     e.stopPropagation();
     if (
       !grades.find(
-        (grd) => grd.student_id === student.student_id && grd.type === "final"
+        (grd) =>
+          grd.student_id === student.student_id && grd.type_value === "final"
       )
     ) {
       setStudent(student);
@@ -66,7 +67,7 @@ const GradesTable = () => {
     e.stopPropagation();
     setGrade(grade);
     setStudent("");
-    setGradeType(grade.type);
+    setGradeType(gradeTypes.filter((gt) => gt.value === grade.type_value)[0]);
     setGradeWeight(grade.weight);
   };
 
@@ -74,8 +75,8 @@ const GradesTable = () => {
     let studentGrades = grades.filter(
       (grd) =>
         grd.student_id === std.student_id &&
-        grd.type !== "proposed" &&
-        grd.type !== "final"
+        grd.type_value !== "proposed" &&
+        grd.type_value !== "final"
     );
     let numerator = 0;
     let denominator = 0;
@@ -141,15 +142,15 @@ const GradesTable = () => {
                     {subject ? (
                       grades.map((grd) =>
                         grd.student_id === std.student_id &&
-                        grd.type !== "proposed" &&
-                        grd.type !== "final" ? (
+                        grd.type_value !== "proposed" &&
+                        grd.type_value !== "final" ? (
                           <div
                             key={grd.grade_id}
                             onClick={(e) => handleSetGrade(e, grd)}
                             className={
                               grd.grade_id === grade?.grade_id
-                                ? `activeGrade ${grd.type}`
-                                : grd.type
+                                ? `activeGrade ${grd.type_value}`
+                                : grd.type_value
                             }
                           >
                             {grd.text}
@@ -183,14 +184,14 @@ const GradesTable = () => {
                     {subject ? (
                       grades.map((grd) =>
                         grd.student_id === std.student_id &&
-                        grd.type === "proposed" ? (
+                        grd.type_value === "proposed" ? (
                           <div
                             key={grd.grade_id}
                             onClick={(e) => handleSetGrade(e, grd)}
                             className={
                               grd.grade_id === grade?.grade_id
-                                ? `activeGrade ${grd.type}`
-                                : grd.type
+                                ? `activeGrade ${grd.type_value}`
+                                : grd.type_value
                             }
                           >
                             {grd.text}
@@ -217,14 +218,14 @@ const GradesTable = () => {
                     {subject ? (
                       grades.map((grd) =>
                         grd.student_id === std.student_id &&
-                        grd.type === "final" ? (
+                        grd.type_value === "final" ? (
                           <div
                             key={grd.grade_id}
                             onClick={(e) => handleSetGrade(e, grd)}
                             className={
                               grd.grade_id === grade?.grade_id
-                                ? `activeGrade ${grd.type}`
-                                : grd.type
+                                ? `activeGrade ${grd.type_value}`
+                                : grd.type_value
                             }
                           >
                             {grd.text}
