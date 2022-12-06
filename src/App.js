@@ -1,26 +1,26 @@
-import { Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Route, Routes } from "react-router-dom";
 import "./index.css";
 
-import Header from "components/Header";
-import Summary from "pages/Summary";
-import Footer from "components/Footer";
-import Login from "components/Login";
-import ButtonRow from "components/ButtonRow";
-import LessonPlan from "pages/LessonPlan";
-import Frequency from "pages/Frequency";
-import AddFrequency from "pages/AddFrequency";
-import Messages from "pages/Messages";
-import Grades from "pages/Grades";
-import AddGrade from "pages/AddGrade";
-import Timetable from "pages/Timetable";
-import NotFound from "components/NotFound";
-import Unauthorized from "components/Unauthorized";
-import Layout from "components/Layout";
-import RequireAuth from "components/RequireAuth";
-import useAuth from "./hooks/useAuth";
-import Logout from "components/Logout";
+import NotFound from "components/auth/NotFound";
+import RequireAuth from "components/auth/RequireAuth";
+import Unauthorized from "components/auth/Unauthorized";
+import Footer from "components/footer";
+import Header from "components/header";
+import Layout from "components/layout";
+import Navigation from "components/navigation";
+import { GradesProvider } from "context/GradesProvider";
 import { MessagesProvider } from "context/MessagesProvider";
+import Attendances from "pages/Attendances";
+import AddFrequency from "pages/Attendances/AddFrequency";
+import Grades from "pages/Grades";
+import Login from "pages/Login";
+import Messages from "pages/Messages";
+import Schedule from "pages/Schedule";
+import Summary from "pages/Summary";
+import Timetable from "pages/Timetable";
+import useAuth from "./hooks/useAuth";
+import { checkRoles } from "utils/checkRoles";
 
 const App = () => {
   const { user } = useAuth();
@@ -28,19 +28,28 @@ const App = () => {
   return (
     <div className="App">
       <Header />
-      {user && <ButtonRow />}
+      {checkRoles(user, ["ROLE_USER"]) && <Navigation />}
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="login" element={<Login />} />
           <Route path="unauthorized" element={<Unauthorized />} />
-          <Route element={<RequireAuth allowedRoles={["USER"]} />}>
+          <Route
+            element={<RequireAuth user={user} allowedRoles={["ROLE_USER"]} />}
+          >
             <Route path="/" element={<Summary />} />
-            <Route path="lesson-plan" element={<LessonPlan />} />
-            <Route path="grades" element={<Grades />} />
-            <Route path="addgrade" element={<AddGrade />} />
+            <Route path="lesson-plan" element={<Schedule />} />
+            <Route
+              path="grades"
+              element={
+                <GradesProvider>
+                  <Grades />
+                </GradesProvider>
+              }
+            />
             <Route path="addfrequency" element={<AddFrequency />} />
             <Route path="timetable" element={<Timetable />} />
-            <Route path="logout" element={<Logout />} />
+            <Route path="frequency" element={<Attendances />} />
+            <Route path="*" element={<NotFound />} />
             <Route
               path="messages"
               element={
@@ -49,8 +58,6 @@ const App = () => {
                 </MessagesProvider>
               }
             />
-            <Route path="frequency" element={<Frequency />} />
-            <Route path="*" element={<NotFound />} />
           </Route>
         </Route>
       </Routes>

@@ -39,6 +39,6 @@ code {
     overflow-y: auto;
 }
 
-.Navigation {
-    margin-bottom: 15px;
+.Header {
+    min-width: 100%;
 }

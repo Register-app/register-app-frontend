@@ -5,10 +5,7 @@ import logo from "assets/logo.PNG";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style/custom.css";
 
-
-
 const Header = () => {
-
   const navigate = useNavigate();
 
   const handleLogout = (e) => {
