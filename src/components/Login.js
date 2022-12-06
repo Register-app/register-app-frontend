@@ -17,7 +17,9 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginInfo, setInfo] = useState("Aby przejść dalej musisz być zalogowany!");
+  const [loginInfo, setInfo] = useState(
+    "Aby przejść dalej musisz być zalogowany!"
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,8 +57,8 @@ const Login = () => {
             <Col className="col-md-4">
               <Form onSubmit={handleSubmit}>
                 <h1 class="h3 mb-3 fw-normal">Zaloguj się</h1>
-                <div class="alert alert-danger" role="alert"> 
-                {loginInfo}
+                <div class="alert alert-danger" role="alert">
+                  {loginInfo}
                 </div>
                 <Col className="form-floating">
                   <input

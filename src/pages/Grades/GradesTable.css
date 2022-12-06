@@ -1,0 +1,79 @@
+.GradesTable .activeStudent {
+    background-color: rgb(154, 173, 255);
+    box-shadow: 0 0 10px rgb(154, 173, 255);
+    transition: background-color 100ms linear;
+}
+
+.GradesTable .grades,
+.GradesTable .proposed-grade,
+.GradesTable .final-grade {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.GradesTable .proposed-grade,
+.GradesTable .final-grade,
+.GradesTable .average {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.GradesTable .test,
+.GradesTable .quiz,
+.GradesTable .activity,
+.GradesTable .proposed,
+.GradesTable .answer,
+.GradesTable .other,
+.GradesTable .final {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid grey;
+    margin: 4px;
+}
+
+.GradesTable .test {
+    background-color: red;
+}
+
+.GradesTable .quiz {
+    background-color: green;
+}
+
+.GradesTable .activity {
+    background-color: orange;
+}
+
+.GradesTable .proposed {
+    background-color: rgb(131, 177, 236);
+}
+
+.GradesTable .final {
+    background-color: rgb(106, 110, 143);
+}
+
+.GradesTable .activeGrade {
+    border: 3px solid rgb(0, 0, 0);
+    box-shadow: 0 0 5px rgb(0, 0, 0);
+    transition: border 50ms ease-in-out;
+}
+
+.GradesTable .row {
+    min-height: 50px;
+}
+
+.GradesTable {
+    height: 43vh;
+    overflow-y: scroll;
+}
+
+.GradesTable .row:first-child {
+    background: white;
+    position: sticky;
+    top: 0;
+}
