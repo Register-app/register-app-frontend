@@ -19,11 +19,11 @@
     align-items: center;
 }
 
-.AttendancesTable .test,
-.AttendancesTable .quiz,
-.AttendancesTable .activity,
-.AttendancesTable .proposed,
-.AttendancesTable .answer,
+.AttendancesTable .NB,
+.AttendancesTable .OB,
+.AttendancesTable .SP,
+.AttendancesTable .NU,
+.AttendancesTable .ZW,
 .AttendancesTable .other,
 .AttendancesTable .final {
     display: flex;
@@ -37,23 +37,23 @@
     margin: 4px;
 }
 
-.AttendancesTable .test {
+.AttendancesTable .NB {
     background-color: red;
 }
 
-.AttendancesTable .quiz {
+.AttendancesTable .OB {
     background-color: green;
 }
 
-.AttendancesTable .activity {
+.AttendancesTable .SP {
     background-color: orange;
 }
 
-.AttendancesTable .proposed {
+.AttendancesTable .NU {
     background-color: rgb(131, 177, 236);
 }
 
-.AttendancesTable .final {
+.AttendancesTable .ZW {
     background-color: rgb(106, 110, 143);
 }
 

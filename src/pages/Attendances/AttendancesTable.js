@@ -10,6 +10,8 @@ const AttendancesTable = () => {
     attendance,
     setAttendance,
     attendances,
+    attendanceType,
+    setAttendanceType,
     students,
     subject,
   } = useAttendances();
@@ -35,6 +37,7 @@ const AttendancesTable = () => {
     e.stopPropagation();
     setAttendance(attendance);
     setStudent("");
+    setAttendanceType(attendance.type);
 
   };
 
@@ -45,14 +48,14 @@ const AttendancesTable = () => {
         {students?.length ? (
           <>
             <Row>
-              <Col md={1} className="border">
+              <Col md={1} className="border text-center">
                 <strong>Numer</strong>
               </Col>
-              <Col md={2} className="border">
+              <Col md={2} className="border text-center">
                 <strong>Imie i nazwisko</strong>
               </Col>
-              <Col md={4} className="border">
-                <strong>Oceny cząstkowe</strong>
+              <Col className="border text-center">
+                <strong>Frekwencja</strong>
               </Col>
             </Row>
             {students.map((std, idx) => (
@@ -78,7 +81,7 @@ const AttendancesTable = () => {
                 >
                   {std.name} {std.second_name}
                 </Col>
-                <Col md={4} className="border">
+                <Col className="border">
                   <div className="attendances">
                     {subject ? (
                       attendances.map((grd) =>
@@ -88,6 +91,8 @@ const AttendancesTable = () => {
                             onClick={(e) => handleSetAttendance(e, grd)}
                             className={
                               grd.attendance_id === attendance?.attendance_id
+                              ? `activeAttendance ${grd.type}`
+                              : grd.type
                             }
                           >
                             {grd.text}

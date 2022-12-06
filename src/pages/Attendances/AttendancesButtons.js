@@ -12,6 +12,7 @@ const AttendancesButtons = () => {
     setAttendance,
     attendances,
     setAttendances,
+    attendanceType,
     students,
     selectedClass,
     attendanceValues,
@@ -26,9 +27,10 @@ const AttendancesButtons = () => {
       { value: 2, text: "OB" },
       { value: 3, text: "ZW" },
       { value: 4, text: "SP" },
+      { value: 5, text: "NB" },
     ]);
   }, []);
-  console.log(attendanceValues);
+  //console.log(attendanceValues);
   const handleAddAttendance = (grd) => {
     if (attendance) {
       const newAttendances = attendances.map((g) => {
@@ -37,6 +39,7 @@ const AttendancesButtons = () => {
             ...g,
             text: grd.text,
             value: grd.value,
+            type: grd.text,
 
           };
         }
@@ -49,6 +52,7 @@ const AttendancesButtons = () => {
         attendance_id: tempId,
         text: grd.text,
         value: grd.value,
+        type: grd.text
       };
       setAttendances((prevArray) => [...prevArray, newAttendance]);
       setTempId(tempId + 1);
@@ -72,7 +76,7 @@ const AttendancesButtons = () => {
                 key={idx}
                 variant="outline-dark"
                 className="border btn-custom"
-                disabled={( !selectedClass || !student) && !attendance}
+                disabled={(!selectedClass || !student) && !attendance}
                 onClick={() => handleAddAttendance(grd)}
               >
                 {grd.text}
@@ -88,7 +92,7 @@ const AttendancesButtons = () => {
             disabled={!attendance}
             onClick={() => handleDeleteAttendance(attendance)}
           >
-            Usuń ocenę
+            Usuń frekwencję
           </Button>
         </Row>
       </Container>

@@ -16,6 +16,8 @@ export const AttendancesProvider = ({ children }) => {
   const [classId, setClassId] = useState(0);
   const [studentName, setStudentName] = useState("");
   const [studentSecondName, setStudentSecondName] = useState("");
+  const [attendanceTypes, setAttendanceTypes] = useState([]);
+  const [attendanceType, setAttendanceType] = useState(null);
 
 
   return (
@@ -47,6 +49,10 @@ export const AttendancesProvider = ({ children }) => {
         setStudentName,
         studentSecondName,
         setStudentSecondName,
+        attendanceType,
+        setAttendanceType,
+        attendanceTypes,
+        setAttendanceTypes,
       }}
     >
       {children}

@@ -29,6 +29,8 @@ const TopBar = () => {
     attendance,
     setAttendances,
     student,
+    setAttendanceTypes,
+    setAttendanceType
 
   } = useAttendances();
 
@@ -37,7 +39,7 @@ const TopBar = () => {
 
   useEffect(() => {
     getClasses();
-    //getGradeTypes();
+    getAttendanceTypes();
   }, []);
 
   useEffect(() => {
@@ -61,14 +63,14 @@ const TopBar = () => {
     }
   };
 
-//   const getGradeTypes = async () => {
-//     try {
-//       const response = await axios.get(`/api/v1/grade-types`);
-//       setGradeTypes(response.data);
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   };
+  const getAttendanceTypes = async () => {
+    try {
+      const response = await axios.get(`/api/v1/attendancetype`);
+      setAttendanceTypes(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const getSubjects = async () => {
     try {
@@ -103,52 +105,31 @@ const TopBar = () => {
     }
   };
 
-//   const handleSetGradeType = (e) => {
-//     if (e.target.value !== "-") {
-//       setGradeType(JSON.parse(e.target.value));
-//     } else {
-//       setGradeType(null);
-//     }
-//   };
+  const handleSetAttendanceType = (e) => {
+    if (e.target.value !== "-") {
+      setAttendanceType(JSON.parse(e.target.value));
+    } else {
+      setAttendanceType(null);
+    }
+  };
 
   return (
     <Container className="TopBar">
       <Row>
-        <Col md={6}>
-          <Row className="d-flex mb-2 justify-content-center">
-            <Col>
+        <Col md={5}>
               <SelectClass
                 classes={classes}
                 setSelectedClass={setSelectedClass}
               />
-            </Col>
-          </Row>
-          <Row className="d-flex justify-content-center">
-            <Col>
+         </Col>
+         <Col md={5}>
               <SelectSubject
                 subjects={subjects}
                 setSubject={setSubject}
                 isDisabled={!selectedClass}
               />
-            </Col>
-          </Row>
         </Col>
-        <Col md={6}>
-          <Row className="d-flex mb-2 justify-content-center">
-            <Col>
-             
-            </Col>
-            <Col>
-              
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+        </Row>
     </Container>
   );
 };

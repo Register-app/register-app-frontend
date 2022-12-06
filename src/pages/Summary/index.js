@@ -1,4 +1,6 @@
 import useAdditionalData from "hooks/useAdditionalData";
+import useAuth from "hooks/useAuth";
+import useAxios from "hooks/useAxios";
 import "pages/Summary/Summary.css";
 import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
@@ -9,15 +11,11 @@ const Summary = () => {
     data();
   }, []);
 
+
   return (
     <Container className="Summary justify-content-md-center">
       <Row className="text-center mb-2">
-        {/* Ten div to jest odstep od gornej belki */}
-        {/* Konfiguracja dla rodzica/ucznia
-          <Col><h4>Plan lekcji</h4></Col>
-          <Col><h4>Ostatnie oceny</h4></Col>
-          <Col><h4>Terminarz</h4></Col>
-          <Col><h4>Ostatnie wiadomości</h4></Col> */}
+
 
         {/* Konfiguracja dla nauczyciela */}
         <Col>
