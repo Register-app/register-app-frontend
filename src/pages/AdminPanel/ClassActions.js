@@ -17,17 +17,17 @@ const ClassActions = () => {
               >
                 <Tab eventKey="add-class" title="Dodaj klasę">
                   <Row>
-                    <Col></Col>
+                    <Col>Dodaj klasę</Col>
                   </Row>
                 </Tab>
                 <Tab eventKey="delete-class" title="Usuń klasę">
                   <Row>
-                    <Col></Col>
+                    <Col>Usuń klasę</Col>
                   </Row>
                 </Tab>
                 <Tab eventKey="edit-class" title="Edytuj klasę">
                   <Row>
-                    <Col></Col>
+                    <Col>Edytuj klasę</Col>
                   </Row>
                 </Tab>
               </Tabs>

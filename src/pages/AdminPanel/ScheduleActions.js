@@ -17,17 +17,17 @@ const ScheduleActions = () => {
               >
                 <Tab eventKey="add-class" title="Dodaj harmonogram">
                   <Row>
-                    <Col></Col>
+                    <Col>Dodaj harmonogram</Col>
                   </Row>
                 </Tab>
                 <Tab eventKey="delete-class" title="Usuń harmonogram">
                   <Row>
-                    <Col></Col>
+                    <Col>Usuń harmonogram</Col>
                   </Row>
                 </Tab>
                 <Tab eventKey="edit-class" title="Edytuj harmonogram">
                   <Row>
-                    <Col></Col>
+                    <Col>Edytuj harmonogram</Col>
                   </Row>
                 </Tab>
               </Tabs>

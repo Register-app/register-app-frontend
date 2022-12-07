@@ -17,17 +17,17 @@ const SubjectActions = () => {
               >
                 <Tab eventKey="add-class" title="Dodaj przedmiot">
                   <Row>
-                    <Col></Col>
+                    <Col>Dodaj przedmiot</Col>
                   </Row>
                 </Tab>
                 <Tab eventKey="delete-class" title="Usuń przedmiot">
                   <Row>
-                    <Col></Col>
+                    <Col>Usuń przedmiot</Col>
                   </Row>
                 </Tab>
                 <Tab eventKey="edit-class" title="Edytuj przedmiot">
                   <Row>
-                    <Col></Col>
+                    <Col>Edytuj przedmiot</Col>
                   </Row>
                 </Tab>
               </Tabs>

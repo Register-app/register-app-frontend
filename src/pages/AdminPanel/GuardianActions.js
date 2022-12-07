@@ -17,17 +17,17 @@ const GuardianActions = () => {
               >
                 <Tab eventKey="add-class" title="Dodaj opiekuna">
                   <Row>
-                    <Col></Col>
+                    <Col>Dodaj opiekuna</Col>
                   </Row>
                 </Tab>
                 <Tab eventKey="delete-class" title="Usuń opiekuna">
                   <Row>
-                    <Col></Col>
+                    <Col>Usuń opiekuna</Col>
                   </Row>
                 </Tab>
                 <Tab eventKey="edit-class" title="Edytuj opiekuna">
                   <Row>
-                    <Col></Col>
+                    <Col>Edytuj opiekuna</Col>
                   </Row>
                 </Tab>
               </Tabs>

@@ -17,17 +17,17 @@ const StudentActions = () => {
               >
                 <Tab eventKey="add-class" title="Dodaj ucznia">
                   <Row>
-                    <Col></Col>
+                    <Col>Dodaj ucznia</Col>
                   </Row>
                 </Tab>
                 <Tab eventKey="delete-class" title="Usuń ucznia">
                   <Row>
-                    <Col></Col>
+                    <Col>Usuń ucznia</Col>
                   </Row>
                 </Tab>
                 <Tab eventKey="edit-class" title="Edytuj ucznia">
                   <Row>
-                    <Col></Col>
+                    <Col>Edytuj ucznia</Col>
                   </Row>
                 </Tab>
               </Tabs>

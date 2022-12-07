@@ -17,17 +17,17 @@ const RegisterActions = () => {
               >
                 <Tab eventKey="add-class" title="Dodaj dziennik">
                   <Row>
-                    <Col></Col>
+                    <Col>Dodaj dziennik</Col>
                   </Row>
                 </Tab>
                 <Tab eventKey="delete-class" title="Usuń dziennik">
                   <Row>
-                    <Col></Col>
+                    <Col>Usuń dziennik</Col>
                   </Row>
                 </Tab>
                 <Tab eventKey="edit-class" title="Edytuj dziennik">
                   <Row>
-                    <Col></Col>
+                    <Col>Edytuj dziennik</Col>
                   </Row>
                 </Tab>
               </Tabs>
