@@ -6,6 +6,8 @@ const RequireAuth = ({ user, allowedRoles }) => {
 
   return checkRoles(user, allowedRoles) ? (
     <Outlet />
+  ) : checkRoles(user, ["ROLE_ADMIN"]) ? (
+    <Navigate to="/panel" state={{ from: location }} replace />
   ) : user?.email ? (
     <Navigate to="/unauthorized" state={{ from: location }} replace />
   ) : (

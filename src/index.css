@@ -34,7 +34,8 @@ code {
 .Frequency,
 .NotFound,
 .Layout,
-.Outlet {
+.Outlet,
+.AdminPanel {
     flex-grow: 1;
     overflow-y: auto;
 }

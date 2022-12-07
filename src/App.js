@@ -11,6 +11,7 @@ import Layout from "components/layout";
 import Navigation from "components/navigation";
 import { GradesProvider } from "context/GradesProvider";
 import { MessagesProvider } from "context/MessagesProvider";
+import { AdminPanelProvider } from "context/AdminPanelProvider";
 import Attendances from "pages/Attendances";
 import AddFrequency from "pages/Attendances/AddFrequency";
 import Grades from "pages/Grades";
@@ -21,6 +22,7 @@ import Summary from "pages/Summary";
 import Timetable from "pages/Timetable";
 import useAuth from "./hooks/useAuth";
 import { checkRoles } from "utils/checkRoles";
+import AdminPanel from "pages/AdminPanel";
 
 const App = () => {
   const { user } = useAuth();
@@ -56,6 +58,18 @@ const App = () => {
                 <MessagesProvider>
                   <Messages />
                 </MessagesProvider>
+              }
+            />
+          </Route>
+          <Route
+            element={<RequireAuth user={user} allowedRoles={["ROLE_ADMIN"]} />}
+          >
+            <Route
+              path="/panel"
+              element={
+                <AdminPanelProvider>
+                  <AdminPanel />
+                </AdminPanelProvider>
               }
             />
           </Route>
