@@ -9,12 +9,7 @@ const RegisterActions = () => {
         <Accordion.Body>
           <Row>
             <Col>
-              <Tabs
-                defaultActiveKey="profile"
-                id="justify-tab-example"
-                className="mb-3"
-                justify
-              >
+              <Tabs defaultActiveKey="profile" id="justify-tab-example" justify>
                 <Tab eventKey="add-class" title="Dodaj dziennik">
                   <Row>
                     <Col>Dodaj dziennik</Col>
