@@ -3,7 +3,7 @@ import useAxios from "hooks/useAxios";
 import { checkRoles } from "utils/checkRoles";
 
 const useAdditionalData = () => {
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
   const axios = useAxios();
 
   const data = () => {
@@ -26,6 +26,7 @@ const useAdditionalData = () => {
       const additionalId = response?.data;
       const merged = { ...user, ...additionalId };
       localStorage.setItem("user", JSON.stringify(merged));
+      setUser(merged);
     } catch (err) {
       console.error(err);
     }
