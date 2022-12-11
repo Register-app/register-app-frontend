@@ -38,6 +38,7 @@ const App = () => {
           >
             <Route path="/" element={<Summary />} />
             <Route path="lesson-plan" element={<Schedule />} />
+            <Route path="timetable" element={<Timetable />} />
             <Route
               path="grades"
               element={

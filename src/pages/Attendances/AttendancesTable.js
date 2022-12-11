@@ -57,6 +57,9 @@ const AttendancesTable = () => {
               <Col className="border text-center">
                 <strong>Frekwencja</strong>
               </Col>
+              <Col md={1} className="border">
+                <strong>Procent</strong>
+              </Col>
             </Row>
             {students.map((std, idx) => (
               <Row
@@ -104,7 +107,11 @@ const AttendancesTable = () => {
                     )}
                   </div>
                 </Col>
-
+                <Col md={1} className="border">
+                  <div className="average">
+                    0.0
+                  </div>
+                </Col>
               </Row>
             ))}
           </>

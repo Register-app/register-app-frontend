@@ -103,7 +103,7 @@ const TopBar = () => {
   //     const response = await axios.get(
   //       `/api/v1/students/class/${selectedClass.class_id}`
   //     );
-  //     setStudents(response.data);
+  //     setGrades(response.data);
   //   } catch (err) {
   //     console.error(err);
   //   }
