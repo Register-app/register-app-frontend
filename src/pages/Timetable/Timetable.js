@@ -1,5 +1,8 @@
 import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import SelectClass from "components/form/SelectClass";
+// import SelectSubject from "components/form/SelectSubject";
+import DatePicker from "components/form/DatePicker";
 import useTimetable from "hooks/useTimetable";
 import useAuth from "hooks/useAuth";
 import useAxios from "hooks/useAxios";
@@ -8,18 +11,46 @@ import { useState } from "react";
 const Timetable = () => {
 
   const [events, setEvents] = useState([]);
+  const [classes, setClasses] = useState([]);
+  const [date, setDate] = useState("2022-01-19"); //domyslna data
+  const [selectedClass, setSelectedClass] = useState(null);
   const { user } = useAuth();
   const axios = useAxios();
+  const [year, month, day] = date.split('-');
+  const date2 = new Date(+year, month-1, day, "01", "00", "00");
+
 
 
   useEffect(() => {
-    getEvents();
+    getClasses();
   }, []);
   
+
+  const getClasses = async () => {
+    try {
+      const response = await axios.get(
+        `/api/v1/classes/teacher/${user.teacher_id}`
+      );
+      setClasses(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+
+
+  useEffect(() => {
+    if (selectedClass) {
+      //getEvents();
+    } else {
+      setEvents([]);
+    }
+  }, [selectedClass]);
+
   const getEvents = async () => {
     try {
       const response = await axios.get(
-        `/api/v1/schedule/class/1/date/{date}?date=2022-01-19T08%3A00%3A00`
+        `/api/v1/schedule/class/${selectedClass.class_id}/date/{date}?date=${date2.toISOString()}`
         //`/api/v1/classes/teacher/${user.teacher_id}`
       );
       setEvents(response.data);
@@ -28,16 +59,37 @@ const Timetable = () => {
       console.error(err);
     }
   };
+  useEffect(() => {
+    if (date) {
+      getEvents();;
+    } else {
+      setEvents([]);
+    }
+  }, [date]);
 
+console.log(date2.toISOString());
 
   return (
     <>
+
+          <Row className="d-flex mb-2 justify-content-center">
+          <Col md={6}>
+              <SelectClass
+                classes={classes}
+                setSelectedClass={setSelectedClass}
+              />
+            </Col>
+            <Col md={6}>
+              <DatePicker setSelectedDate={setDate} isDisabled={!selectedClass}></DatePicker>
+            </Col>
+          </Row>
+
       <Container className="TimeTable border">
         {events?.length ? (
           <>
             <Row>
               <Col md={1} className="border text-center">
-                <strong>Numer</strong>
+                <strong>LP</strong>
               </Col>
               <Col md={2} className="border text-center">
                 <strong>Rodzaj wydarzenia </strong>
@@ -46,7 +98,7 @@ const Timetable = () => {
                 <strong>Przedmiot</strong>
               </Col>
               <Col md={2} className="border">
-                <strong>Data</strong>
+                <strong>Godzina</strong>
               </Col>
             </Row>
             {events.map((evt, idx) => evt.schedule_type_id !== 'lekcja' ? (
@@ -62,7 +114,7 @@ const Timetable = () => {
                   {evt.subject}
                 </Col>
                 <Col md={2} className="border">
-                  godzina
+                  {new Date(evt.date).toLocaleTimeString('pl', {hour: '2-digit', minute:'2-digit'})}
                 </Col>
               </Row>
             ): null )}

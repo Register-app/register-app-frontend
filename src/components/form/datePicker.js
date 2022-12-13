@@ -1,23 +1,30 @@
 import React from "react";
-import { Form } from "react-bootstrap";
+import { FormGroup, FormLabel, FormControl } from "react-bootstrap";
 
-class DatePicker extends React.Component {
-  render() {
+const DatePicker = ({ date, setSelectedDate, isDisabled }) => {
+  const handleChangeDate = (event) => {
+    if (event.target.value !== "-") {
+      setSelectedDate(event.target.value);
+    } else {
+      setSelectedDate(null);
+    }
+  };
     return (
-      <div>
-        <Form.Group controlId="doj">
-          {/* <Form.Label>Wybierz datę</Form.Label> */}
-          <Form.Control
+      
+        <FormGroup className="form-floating">
+          <FormControl
+           onChange={(e) => handleChangeDate(e)}
             type="date"
             name="doj"
-            defaultValue={this.props.selectedValue}
+            defaultValue={date}
             placeholder="Data"
-            onChange={(e) => this.props.onChange(e)}
+            disabled={isDisabled}
+           
           />
-        </Form.Group>
-      </div>
+          <FormLabel>Data:</FormLabel>
+        </FormGroup>
+      
     );
-  }
-}
+    };
 
 export default DatePicker;
