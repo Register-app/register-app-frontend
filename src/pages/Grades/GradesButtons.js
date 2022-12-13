@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { Button, Container, Row } from "react-bootstrap";
+import useAuth from "hooks/useAuth";
+import useAxios from "hooks/useAxios";
+import useGrades from "hooks/useGrades";
 import "pages/Grades/GradesButtons.css";
 import { useEffect } from "react";
-import useGrades from "hooks/useGrades";
+import { Button, Container, Row } from "react-bootstrap";
 
 const GradesButtons = () => {
   const {
@@ -19,41 +20,75 @@ const GradesButtons = () => {
     gradeValues,
     setGradeValues,
     gradeComment,
+    subject,
   } = useGrades();
 
-  const [tempId, setTempId] = useState(100);
+  const { user } = useAuth();
+
+  const axios = useAxios();
+
+  const getGradeValues = async () => {
+    try {
+      const response = await axios.get(`/api/v1/grade-values`);
+      setGradeValues(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
-    setGradeValues([
-      { value: 5.75, text: "6-" },
-      { value: 6, text: "6" },
-      { value: 0, text: "+" },
-      { value: 4.75, text: "5-" },
-      { value: 5, text: "5" },
-      { value: 5.5, text: "5+" },
-      { value: 3.75, text: "4-" },
-      { value: 4, text: "4" },
-      { value: 4.5, text: "4+" },
-      { value: 2.75, text: "3-" },
-      { value: 3, text: "3" },
-      { value: 3.5, text: "3+" },
-      { value: 1.75, text: "2-" },
-      { value: 2, text: "2" },
-      { value: 2.5, text: "2+" },
-      { value: 0, text: "-" },
-      { value: 1, text: "1" },
-      { value: 1.5, text: "1+" },
-    ]);
+    getGradeValues();
   }, []);
 
-  const handleAddGrade = (grd) => {
+  const handleGradeAction = (grd) => {
     if (grade) {
+      updateGrade(grd);
+    } else {
+      addGrade(grd);
+    }
+  };
+
+  const handleDeleteGrade = (grd) => {
+    deleteGrade(grd);
+  };
+
+  const addGrade = async (grd) => {
+    try {
+      const date = new Date();
+      const response = await axios.post(`/api/v1/grades/grade`, {
+        student_id: student.student_id,
+        grade_type_id: gradeType.grade_type_id,
+        grade_value_id: grd.grade_value_id,
+        weight: gradeWeight,
+        comment: gradeComment,
+        date: date,
+        class_id: selectedClass.class_id,
+        teacher_id: user.teacher_id,
+        subject_id: subject.subject_id,
+      });
+      setGrades((grades) => [...grades, response?.data]);
+      setStudent(students[students.indexOf(student) + 1]);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const updateGrade = async (grd) => {
+    try {
+      await axios.put(`/api/v1/grades/grade`, {
+        grade_id: grade.grade_id,
+        grade_type_id: gradeType.grade_type_id,
+        grade_value_id: grd.grade_value_id,
+        weight: gradeWeight,
+        comment: gradeComment,
+      });
       const newGrades = grades.map((g) => {
         if (g.grade_id === grade.grade_id) {
           return {
             ...g,
             text: grd.text,
-            type: gradeType.value,
+            type_value: gradeType.value,
+            type_text: gradeType.text,
             value: grd.value,
             weight: gradeWeight,
             comment: gradeComment,
@@ -62,26 +97,20 @@ const GradesButtons = () => {
         return g;
       });
       setGrades(newGrades);
-    } else {
-      const newGrade = {
-        student_id: student.student_id,
-        grade_id: tempId,
-        type: gradeType.value,
-        text: grd.text,
-        value: grd.value,
-        weight: gradeWeight,
-        comment: gradeComment,
-      };
-      setGrades((prevArray) => [...prevArray, newGrade]);
-      setTempId(tempId + 1);
-      setStudent(students[students.indexOf(student) + 1]);
+    } catch (err) {
+      console.error(err);
     }
   };
 
-  const handleDeleteGrade = (grd) => {
-    const newGrades = grades.filter((g) => g.grade_id !== grd.grade_id);
-    setGrades(newGrades);
-    setGrade(null);
+  const deleteGrade = async (grd) => {
+    try {
+      await axios.delete(`/api/v1/grades/grade/${grade.grade_id}`);
+      const newGrades = grades.filter((g) => g.grade_id !== grd.grade_id);
+      setGrades(newGrades);
+      setGrade(null);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -95,7 +124,7 @@ const GradesButtons = () => {
                 variant="outline-dark"
                 className="border btn-custom"
                 disabled={(!gradeType || !selectedClass || !student) && !grade}
-                onClick={() => handleAddGrade(grd)}
+                onClick={() => handleGradeAction(grd)}
               >
                 {grd.text}
               </Button>
