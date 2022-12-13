@@ -8,12 +8,10 @@ import useAxios from "hooks/useAxios";
 import { useState } from "react";
 import { checkRoles } from "utils/checkRoles";
 
-const Timetable = () => {
+const Schedule = () => {
 
   const [events, setEvents] = useState([]);
-  const [classes, setClasses] = useState([]);
   const [date, setDate] = useState("2022-01-19"); //domyslna data
-  const [selectedClass, setSelectedClass] = useState(null);
   const { user } = useAuth();
   const axios = useAxios();
   const [year, month, day] = date.split('-');
@@ -21,31 +19,6 @@ const Timetable = () => {
 
 
 
-  useEffect(() => {
-    getClasses();
-  }, []);
-  
-
-  const getClasses = async () => {
-    try {
-      const response = await axios.get(
-        `/api/v1/classes/teacher/${user.teacher_id}`
-      );
-      setClasses(response.data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-
-
-  useEffect(() => {
-    if (selectedClass) {
-      getEvents();
-    } else {
-      setEvents([]);
-    }
-  }, [selectedClass]);
 
   const getEvents = async () => {
     if(checkRoles(user, ["ROLE_TEACHER"])){
@@ -70,7 +43,6 @@ const Timetable = () => {
       console.error(err);
     }
   }};
-
   useEffect(() => {
     if (date) {
       getEvents();;
@@ -85,14 +57,9 @@ console.log(date2.toISOString());
     <>
 
           <Row className="d-flex mb-2 justify-content-center">
-            
-          {checkRoles(user, ["ROLE_TEACHER"]) && <Col md={6}><SelectClass classes={classes} setSelectedClass={setSelectedClass} /></Col>}
             <Col md={6}>
-            {checkRoles(user, ["ROLE_TEACHER"])&&<DatePicker setSelectedDate={setDate} isDisabled={!selectedClass}></DatePicker>}
-            {checkRoles(user, ["ROLE_STUDENT"])&&<DatePicker setSelectedDate={setDate}></DatePicker>}
+              <DatePicker defaultValue={date} setSelectedDate={setDate}></DatePicker>
             </Col>
-
-            
           </Row>
 
       <Container className="TimeTable border">
@@ -108,23 +75,27 @@ console.log(date2.toISOString());
               <Col className="border text-center">
                 <strong>Przedmiot</strong>
               </Col>
-              <Col md={2} className="border">
+              {checkRoles(user, ["ROLE_TEACHER"])&&<Col md={2} className="border text-center"><strong>Klasa</strong></Col>}
+              {checkRoles(user, ["ROLE_STUDENT"])&&<Col md={2} className="border text-center"><strong>Nauczyciel</strong></Col>}
+              <Col md={2} className="border text-center">
                 <strong>Godzina</strong>
               </Col>
             </Row>
-            {events.map((evt, idx) => evt.schedule_type_id !== 'lekcja' ? (
+            {events.map((evt, idx) => evt.schedule_type_id !== 'test' ? (
               
               <Row>
-                <Col md={1} className="border">
+                <Col md={1} className="border text-center">
                   {++idx}
                 </Col>
-                <Col md={2} className="border">
+                <Col md={2} className="border text-center">
                   {evt.schedule_type_id} 
                 </Col>
-                <Col className="border">
+                <Col className="border text-center">
                   {evt.subject}
                 </Col>
-                <Col md={2} className="border">
+                {checkRoles(user, ["ROLE_STUDENT"])&&<Col md={2} className="border text-center">{evt.teacher_id}</Col>}
+                {checkRoles(user, ["ROLE_TEACHER"])&&<Col md={2} className="border text-center">klasa X</Col>}
+                <Col md={2} className="border text-center">
                   {new Date(evt.date).toLocaleTimeString('pl', {hour: '2-digit', minute:'2-digit'})}
                 </Col>
               </Row>
@@ -138,4 +109,4 @@ console.log(date2.toISOString());
   );
 };
 
-export default Timetable;
+export default Schedule;
