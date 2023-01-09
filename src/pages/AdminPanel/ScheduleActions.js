@@ -217,9 +217,8 @@ const ScheduleActions = () => {
                                 placeholder="Comment"
                                 value={comment}
                                 onChange={(e) => setComment(e.target.value)}
-                                required
                               />
-                              <FormLabel>Komentarz*:</FormLabel>
+                              <FormLabel>Komentarz:</FormLabel>
                             </FormGroup>
                           </Col>
                         </Row>
