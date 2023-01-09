@@ -18,7 +18,7 @@ import useAxios from "hooks/useAxios";
 
 const ScheduleActions = () => {
   const [date, setDate] = useState("");
-  const [weeks, setWeeks] = useState(0);
+  const [weeks, setWeeks] = useState(1);
   const [comment, setComment] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [registers, setRegisters] = useState([]);
