@@ -11,7 +11,6 @@ import Layout from "components/layout";
 import Navigation from "components/navigation";
 import { GradesProvider } from "context/GradesProvider";
 import { MessagesProvider } from "context/MessagesProvider";
-import { AdminPanelProvider } from "context/AdminPanelProvider";
 import Attendances from "pages/Attendances";
 import AddFrequency from "pages/Attendances/AddFrequency";
 import Grades from "pages/Grades";
@@ -52,24 +51,26 @@ const App = () => {
             <Route path="timetable" element={<Timetable />} />
             <Route path="frequency" element={<Attendances />} />
             <Route path="*" element={<NotFound />} />
+          </Route>
+          <Route
+            element={<RequireAuth user={user} allowedRoles={["ROLE_ADMIN"]} />}
+          >
+            <Route path="panel" element={<AdminPanel />} />
+          </Route>
+          <Route
+            element={
+              <RequireAuth
+                user={user}
+                allowedRoles={["ROLE_ADMIN", "ROLE_USER"]}
+              />
+            }
+          >
             <Route
               path="messages"
               element={
                 <MessagesProvider>
                   <Messages />
                 </MessagesProvider>
-              }
-            />
-          </Route>
-          <Route
-            element={<RequireAuth user={user} allowedRoles={["ROLE_ADMIN"]} />}
-          >
-            <Route
-              path="/panel"
-              element={
-                <AdminPanelProvider>
-                  <AdminPanel />
-                </AdminPanelProvider>
               }
             />
           </Route>

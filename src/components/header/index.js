@@ -1,6 +1,7 @@
 import logo from "assets/logo.PNG";
 import useAuth from "hooks/useAuth";
 import useLogout from "hooks/useLogout";
+import { checkRoles } from "utils/checkRoles";
 import {
   Button,
   Col,
@@ -45,9 +46,11 @@ const Header = () => {
                   <NavDropdown
                     title={`Witaj, ${user.name} ${user.second_name}`}
                   >
-                    <LinkContainer to="/">
-                      <NavDropdown.Item>Nowa wiadomość</NavDropdown.Item>
-                    </LinkContainer>
+                    {checkRoles(user, ["ROLE_ADMIN"]) && (
+                      <LinkContainer to="/messages">
+                        <NavDropdown.Item>Wiadomości</NavDropdown.Item>
+                      </LinkContainer>
+                    )}
                     <LinkContainer to="/home">
                       <NavDropdown.Item>Ustawienia</NavDropdown.Item>
                     </LinkContainer>
