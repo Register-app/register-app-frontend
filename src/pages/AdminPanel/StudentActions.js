@@ -25,18 +25,12 @@ const StudentActions = () => {
   const [errMsg, setErrMsg] = useState("");
   const [classes, setClasses] = useState([]);
   const [selectedClass, setSelectedClass] = useState(null);
-  const [guardians, setGuardians] = useState([]);
-  const [guardian, setGuardian] = useState([]);
   const [students, setStudents] = useState([]);
   const [student, setStudent] = useState(null);
 
   const getClasses = async () => {
     const classes = await axios.get("/api/v1/classes");
     setClasses(classes.data);
-  };
-  const getGuardians = async () => {
-    const guardians = await axios.get("/api/v1/guardians");
-    setGuardians(guardians.data);
   };
   const getStudents = async () => {
     const students = await axios.get("/api/v1/students");
@@ -53,83 +47,83 @@ const StudentActions = () => {
     setPassword(Math.random().toString(36).slice(-8));
   };
 
-  const handleAddStudent = () => {
+  const handleAddStudent = async () => {
     try {
-      const user = axios.post(`/api/v1/users/user`, {
+      const user = await axios.post(`/api/v1/users/user`, {
         name,
         second_name,
         email,
         password,
       });
-      const student = axios.post(`/api/v1/students/student`, {
+      const student = await axios.post(`/api/v1/students/student`, {
         user_id: user.data.user_id,
-        class_id: selectedClass.class_id,
-        guardian_id: guardian.user_id,
+        class_id: selectedClass?.class_id,
       });
-      Alert.success(
-        "Dodano ucznia: " + student.data.name + " " + student.data.second_name
+      console.log(
+        "Dodano ucznia: " +
+          user.data.name +
+          " " +
+          user.data.second_name +
+          " o id ucznia: " +
+          student.data.student_id
       );
       setName("");
       setSecondName("");
       setEmail("");
       setPassword("");
-      setGuardian([]);
       setErrMsg("");
     } catch (error) {
       setErrMsg("Nie udało się dodać ucznia.");
+      console.log("Nie udało się dodać ucznia.");
     }
   };
 
-  const handleEditStudent = () => {
+  const handleEditStudent = async () => {
     try {
-      axios.put(`/api/v1/users/user`, {
+      await axios.put(`/api/v1/users/user`, {
         user_id: student.user_id,
         name,
         second_name,
         email,
         password,
       });
-      axios.put(`/api/v1/students/student`, {
+      await axios.put(`/api/v1/students/student`, {
         student_id: student.student_id,
         class_id: selectedClass.class_id,
-        guardian_id: guardian.user_id,
       });
-      Alert.success(
-        "Edytowano ucznia: " +
-          student.data.name +
-          " " +
-          student.data.second_name
-      );
+      getStudents();
+      setStudent(null);
       setName("");
       setSecondName("");
       setEmail("");
       setPassword("");
-      setGuardian([]);
       setErrMsg("");
     } catch (error) {
-      setErrMsg("Nie udało się edytować ucznia.");
+      setErrMsg("Nie udało się edytować ucznia." + error);
     }
   };
 
-  const handleDeleteStudent = () => {
+  const handleDeleteStudent = async () => {
     try {
-      axios.delete(`/api/v1/users/user`, {
-        user_id: student.user_id,
-      });
-      axios.delete(`/api/v1/students/student`, {
-        student_id: student.student_id,
-      });
-      Alert.success(
-        "Usunięto ucznia: " + student.data.name + " " + student.data.second_name
+      await axios.delete(`/api/v1/students/student/${student.student_id}`);
+      await axios.delete(`/api/v1/users/user/${student.user_id}`);
+      console.log(
+        "Usunięto ucznia: " +
+          student.name +
+          " " +
+          student.second_name +
+          " o id ucznia: " +
+          student.student_id
       );
+      getStudents();
+      setStudent(null);
       setName("");
       setSecondName("");
       setEmail("");
       setPassword("");
-      setGuardian([]);
       setErrMsg("");
     } catch (error) {
-      setErrMsg("Nie udało się usunąć ucznia.");
+      setErrMsg("Nie udało się usunąć ucznia." + error);
     }
   };
 
@@ -138,23 +132,6 @@ const StudentActions = () => {
       setSelectedClass(JSON.parse(event.target.value));
     } else {
       setSelectedClass(null);
-    }
-  };
-
-  const handleChangeGruardian = (event) => {
-    const selectedValue = JSON.parse(event.target.value);
-    if (
-      guardian
-        .map((grd) => JSON.stringify(grd))
-        .includes(JSON.stringify(selectedValue))
-    ) {
-      setGuardian(
-        guardian.filter(
-          (item) => JSON.stringify(item) !== JSON.stringify(selectedValue)
-        )
-      );
-    } else {
-      setGuardian([...guardian, selectedValue]);
     }
   };
 
@@ -167,17 +144,12 @@ const StudentActions = () => {
           setSelectedClass(cl);
         }
       });
-      student.guardian_id.forEach((grd) => {
-        guardians.forEach((grd2) => {
-          if (grd2.guardian_id === grd) {
-            setGuardian([...guardian, grd2]);
-          }
-        });
-      });
+      setName(student.name);
+      setSecondName(student.second_name);
+      setEmail(student.email);
     } else {
       setStudent(null);
       setSelectedClass(null);
-      setGuardian([]);
     }
   };
 
@@ -187,7 +159,6 @@ const StudentActions = () => {
     setEmail("");
     setPassword("");
     setSelectedClass(null);
-    setGuardian([]);
     setStudent(null);
     setErrMsg("");
   };
@@ -211,7 +182,6 @@ const StudentActions = () => {
                   title="Dodaj ucznia"
                   onEnter={() => {
                     getClasses();
-                    getGuardians();
                     clearData();
                   }}
                 >
@@ -278,7 +248,7 @@ const StudentActions = () => {
                             </InputGroup>
                           </Col>
                         </Row>
-                        <Row className="mt-5 mb-2">
+                        <Row className="mt-4 mb-2">
                           <Col>
                             <FormGroup className="form-floating">
                               <FormSelect
@@ -297,29 +267,6 @@ const StudentActions = () => {
                               </FormSelect>
                               <FormLabel>Klasa:</FormLabel>
                             </FormGroup>
-                          </Col>
-                        </Row>
-                        <Row className="mb-2">
-                          <Col>
-                            <InputGroup>
-                              <InputGroup.Text>Opiekun:</InputGroup.Text>
-                              <FormSelect
-                                onChange={handleChangeGruardian}
-                                value={guardian.map((guard) =>
-                                  JSON.stringify(guard)
-                                )}
-                                multiple
-                              >
-                                {guardians.map((guard) => (
-                                  <option
-                                    key={guard.user_id}
-                                    value={JSON.stringify(guard)}
-                                  >
-                                    {guard.second_name} {guard.name}
-                                  </option>
-                                ))}
-                              </FormSelect>
-                            </InputGroup>
                           </Col>
                         </Row>
                         <Row md={3} className="d-flex justify-content-center">
@@ -377,7 +324,6 @@ const StudentActions = () => {
                   onEnter={() => {
                     getStudents();
                     getClasses();
-                    getGuardians();
                   }}
                 >
                   <Row className="justify-content-center">
@@ -411,7 +357,7 @@ const StudentActions = () => {
                               <FormControl
                                 type="text"
                                 placeholder="First name"
-                                value={student?.name ? student.name : ""}
+                                value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 disabled={!student}
                                 required
@@ -424,11 +370,7 @@ const StudentActions = () => {
                               <FormControl
                                 type="text"
                                 placeholder="Second name"
-                                value={
-                                  student?.second_name
-                                    ? student.second_name
-                                    : ""
-                                }
+                                value={second_name}
                                 onChange={(e) => setSecondName(e.target.value)}
                                 disabled={!student}
                                 required
@@ -444,7 +386,7 @@ const StudentActions = () => {
                               <FormControl
                                 type="email"
                                 placeholder="Email address"
-                                value={student?.email ? student.email : ""}
+                                value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 disabled={!student}
                                 required
@@ -476,7 +418,7 @@ const StudentActions = () => {
                             </InputGroup>
                           </Col>
                         </Row>
-                        <Row className="mt-5 mb-2">
+                        <Row className="mt-4 mb-2">
                           <Col>
                             <FormGroup className="form-floating">
                               <FormSelect
@@ -496,30 +438,6 @@ const StudentActions = () => {
                               </FormSelect>
                               <FormLabel>Klasa:</FormLabel>
                             </FormGroup>
-                          </Col>
-                        </Row>
-                        <Row className="mb-2">
-                          <Col>
-                            <InputGroup>
-                              <InputGroup.Text>Opiekun:</InputGroup.Text>
-                              <FormSelect
-                                onChange={handleChangeGruardian}
-                                value={guardian.map((guard) =>
-                                  JSON.stringify(guard)
-                                )}
-                                multiple
-                                disabled={!student}
-                              >
-                                {guardians.map((guard) => (
-                                  <option
-                                    key={guard.user_id}
-                                    value={JSON.stringify(guard)}
-                                  >
-                                    {guard.second_name} {guard.name}
-                                  </option>
-                                ))}
-                              </FormSelect>
-                            </InputGroup>
                           </Col>
                         </Row>
                         <Row md={3} className="d-flex justify-content-center">

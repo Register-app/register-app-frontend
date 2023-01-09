@@ -1,3 +1,7 @@
 .AdminPanel>.row {
     margin-bottom: 8px;
 }
+
+.AdminPanel .form-check {
+    text-align: left;
+}
