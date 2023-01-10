@@ -51,7 +51,6 @@ const Summary = () => {
       <Row className="text-center mb-2">
 
 
-        {/* Konfiguracja dla nauczyciela */}
         <Col>
           <h4>Dzisiejszy plan</h4>
         </Col>
@@ -68,7 +67,7 @@ const Summary = () => {
           <div className="p-3 border bg-light text-break">
           {events.map((evt) => evt.schedule_type_id !== 'test' ? (
               
-              <Row>{new Date(evt.date).toLocaleTimeString('pl', {hour: '2-digit', minute:'2-digit'})} {evt.schedule_type_id} {evt.subject} </Row>
+              <Row>{new Date(evt.date).toLocaleTimeString('pl', {hour: '2-digit', minute:'2-digit'})} - {new Date(new Date(evt.date).setMinutes((new Date(evt.date)).getMinutes() + 45)).toLocaleTimeString('pl', {hour: '2-digit', minute:'2-digit'})} {evt.subject} </Row>
             ): null )}
           </div>
         </Col>
@@ -76,7 +75,7 @@ const Summary = () => {
           <div className="p-3 border bg-light text-break">
           {events.map((evt) => evt.schedule_type_id !== 'lekcja' ? (
               
-              <Row>{new Date(evt.date).toLocaleTimeString('pl', {hour: '2-digit', minute:'2-digit'})} {evt.schedule_type_id} {evt.subject} </Row>
+              <Row><p><b>[{evt.schedule_type_id}]</b> {new Date(evt.date).toLocaleTimeString('pl', {hour: '2-digit', minute:'2-digit'})}  {evt.subject} </p></Row>
             ): null )}
         </div>
         </Col>
