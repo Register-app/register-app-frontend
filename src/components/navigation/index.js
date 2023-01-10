@@ -42,7 +42,7 @@ const Navigation = () => {
               </LinkContainer>
             </Col>
             <Col>
-              <LinkContainer to="/frequency" className="btn border">
+              <LinkContainer to="/attendances" className="btn border">
                 <Nav.Link>
                   <Icon.Calendar3 size={50} />
                   <div className="navText">Frekwencja</div>
