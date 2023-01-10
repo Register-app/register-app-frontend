@@ -8,26 +8,16 @@ const Footer = () => {
         <Row>
           <Col className="col-sm-6 col-md-6 item">
             <Row>
-              <h3>Services</h3>
+              <h3>Szkoła Podstawowa XYZ</h3>
             </Row>
             <Col>
               <small>
-                <Row> Web design </Row>
-                <Row> Development </Row>
-                <Row> Hosting </Row>
+                <Row> Dane kontaktowe </Row>
+                <Row> Rada rodziców </Row>
+                <Row> Strona szkoły </Row>
               </small>
             </Col>
           </Col>
-          {/* <Col className="col-sm-6 col-md-3 item">
-                    <Row><h3>About</h3></Row>
-                        <Col>
-                            <small>
-                                <Row> Company </Row>
-                                <Row> Team </Row>
-                                <Row> Careers </Row>
-                            </small>
-                        </Col>
-                    </Col> */}
           <Col className="col-md-6 item text">
             <Row>
               <h3>e-Dziennik</h3>
@@ -35,10 +25,7 @@ const Footer = () => {
             <small>
               <Row>
                 <p>
-                  Praesent sed lobortis mi. Suspendisse vel placerat ligula.
-                  Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam
-                  quis tristique lectus. Aliquam in arcu eget velit pulvinar
-                  dictum vel in justo.
+                  Dziennik elektroniczny SP XYZ
                 </p>
               </Row>
             </small>
