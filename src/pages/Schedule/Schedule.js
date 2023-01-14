@@ -43,6 +43,8 @@ const Schedule = () => {
       console.error(err);
     }
   }};
+
+
   useEffect(() => {
     if (date) {
       getEvents();;
@@ -51,7 +53,6 @@ const Schedule = () => {
     }
   }, [date]);
 
-console.log(date2.toISOString());
 
   return (
     <>
@@ -93,8 +94,8 @@ console.log(date2.toISOString());
                 <Col className="border text-center">
                   {evt.subject}
                 </Col>
-                {checkRoles(user, ["ROLE_STUDENT"])&&<Col md={2} className="border text-center">{evt.teacher_id}</Col>}
-                {checkRoles(user, ["ROLE_TEACHER"])&&<Col md={2} className="border text-center">klasa X</Col>}
+                {checkRoles(user, ["ROLE_STUDENT"])&&<Col md={2} className="border text-center">{evt.name} {evt.second_name}</Col>}
+                {checkRoles(user, ["ROLE_TEACHER"])&&<Col md={2} className="border text-center">{evt.class_name}</Col>}
                 <Col md={2} className="border text-center">
                   {new Date(evt.date).toLocaleTimeString('pl', {hour: '2-digit', minute:'2-digit'})}
                 </Col>

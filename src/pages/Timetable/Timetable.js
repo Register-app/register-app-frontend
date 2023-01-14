@@ -51,7 +51,7 @@ const Timetable = () => {
     if(checkRoles(user, ["ROLE_TEACHER"])){
     try {
       const response = await axios.get(
-        `/api/v1/schedule/teacher/${user.teacher_id}/date/{date}?date=${date2.toISOString()}`
+        `/api/v1/schedule/class/${selectedClass.class_id}/date/{date}?date=${date2.toISOString()}`
       );
       setEvents(response.data);
       console.log(response.data);
