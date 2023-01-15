@@ -10,6 +10,7 @@ import { checkRoles } from "utils/checkRoles";
 const Summary = () => {
 
   const [events, setEvents] = useState([]);
+  const [grades, setGrades] = useState([]);
   const [date, setDate] = useState("2022-01-19"); //domyslna data
   const { user } = useAuth();
   const axios = useAxios();
@@ -20,6 +21,7 @@ const Summary = () => {
   useEffect(() => {
     data();
     getEvents();
+    getGrades();
   }, []);
 
   const getEvents = async () => {
@@ -46,6 +48,20 @@ const Summary = () => {
     }
   }};
 
+  const getGrades = async () => {
+    if(checkRoles(user, ["ROLE_STUDENT"])){
+    try {
+      const response = await axios.get(
+        `/api/v1/grades/student/${user.student_id}/date/{date}?date=${date2.toISOString()}`
+      );
+      setGrades(response.data);
+      console.log(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+};
+
   return (
     <Container className="Summary justify-content-md-center">
       <Row className="text-center mb-2">
@@ -58,7 +74,8 @@ const Summary = () => {
           <h4>Terminarz</h4>
         </Col>
         <Col>
-          <h4>Ostatnie wiadomości</h4>
+        {checkRoles(user, ["ROLE_STUDENT"])&&<h4>Ostatnie oceny</h4>}
+        {checkRoles(user, ["ROLE_TEACHER"]) &&<h4>Ostatnie wiadomości</h4>}
         </Col>
       </Row>
 
@@ -81,7 +98,8 @@ const Summary = () => {
         </Col>
         <Col className="col-4">
           <div className="p-3 border bg-light text-break">
-            Już wkrótce
+          {checkRoles(user, ["ROLE_STUDENT"]) && grades.map((grd) => (<Row><p><b>{grd.subject}:</b> {grd.value_text} ({grd.type_text})</p> </Row>))}
+          {checkRoles(user, ["ROLE_TEACHER"]) && "Już wkrótce"}
           </div>
         </Col>
       </Row>
