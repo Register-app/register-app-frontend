@@ -71,7 +71,7 @@ const Schedule = () => {
                 <strong>LP</strong>
               </Col>
               <Col md={2} className="border text-center">
-                <strong>Rodzaj wydarzenia </strong>
+                <strong>Rodzaj zajęć</strong>
               </Col>
               <Col className="border text-center">
                 <strong>Przedmiot</strong>
